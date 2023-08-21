@@ -1,38 +1,66 @@
-.App {
-  text-align: center;
+/*Form*/
+.form {
+  background: rgb(103, 108, 114);
+  background: linear-gradient(
+    90deg,
+    rgb(0, 101, 219) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*Teacher*/
+.list-group a:hover {
+  background-color: #cb99c9;
+  color: white;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.inputWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.divInput {
+  min-height: 30px;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+.divInput:empty::before {
+  content: attr(placeholder);
+  color: #aaa;
+}
+
+.divInput:focus {
+  outline: none;
+}
+
+.validationMessage {
+  display: none;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px; /* Adjust for your preferred spacing */
+}
+
+.divInput:empty + .validationMessage {
+  display: block;
+}
+
+.radioButtonDiv {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  gap: 6rem;
+  font-size: 2rem;
 }
