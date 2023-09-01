@@ -1,0 +1,69 @@
+/* Match Masters*/
+.rectangle-container {
+  display: flex;
+  /*flex-direction: column; /* Changed from row to column */
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.rectangles {
+  display: flex;
+  justify-content: center;
+}
+
+.rectangle {
+  width: 200px;
+  height: 350px;
+  background-color: #ccc;
+  margin: 60px;
+  border: 1px solid black;
+}
+
+.square-box {
+  width: 90px;
+  height: 90px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 15px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.sound-button {
+  width: 70px;
+  height: 70px;
+}
+
+.check-button {
+  display: block;
+  margin: 10px auto;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.timer-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* You can adjust this for spacing between icon and text */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Optional, to give it some background for readability */
+  padding: 5px; /* Optional, spacing around the content */
+  border-radius: 5px; /* Optional, to give it rounded edges */
+}

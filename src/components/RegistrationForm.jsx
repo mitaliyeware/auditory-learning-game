@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 const RegistrationForm = ({
   user,
   dateInputRef,
@@ -17,15 +19,17 @@ const RegistrationForm = ({
             </label>
             <input
               type="text"
-              className="divInput form-control"
-              id="exampleInputFirstName"
-              contentEditable={true}
-              aria-required="true"
               name="firstName"
+              className="form-control"
+              id="exampleInputLastName"
               value={user.firstName}
-              onChange={(e) => handleFieldChange(e)}
+              onChange={(e) => {
+                handleFieldChange(e);
+              }}
+              placeholder="Please Enter Your First Name Here"
             />
-            <span className="validationMessage">First name is required.</span>
+
+            {/* <span className="validationMessage">First name is required.</span> */}
           </div>
         </div>
         <div className="col-md-6">
@@ -43,6 +47,7 @@ const RegistrationForm = ({
               name="lastName"
               value={user.lastName}
               onChange={(e) => handleFieldChange(e)}
+              placeholder="Please Enter Your Last Name Here"
             />
           </div>
         </div>
@@ -64,6 +69,7 @@ const RegistrationForm = ({
               name="email"
               value={user.email}
               onChange={(e) => handleFieldChange(e)}
+              placeholder="Please Enter Your Email ID Here"
               // onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
           </div>
@@ -84,6 +90,7 @@ const RegistrationForm = ({
               name="password"
               value={user.password}
               onChange={(e) => handleFieldChange(e)}
+              placeholder="Please Enter Your Password Here"
             />
           </div>
         </div>
@@ -105,6 +112,7 @@ const RegistrationForm = ({
               type="tel"
               value={user.phone}
               onChange={(e) => handleFieldChange(e)}
+              placeholder="Please Enter Your Contact Number Here"
             />
           </div>
         </div>
@@ -125,13 +133,14 @@ const RegistrationForm = ({
               value={user.birthDate}
               ref={dateInputRef}
               onChange={(e) => handleFieldChange(e)}
+              placeholder="Please Enter Your Birthdate Here"
             />
           </div>
         </div>
       </div>
-      {selectedOption === "child" ? (
-        <>
-          <div className="side-by-side">
+      <div className="side-by-side">
+        {selectedOption === "child" || selectedOption === "parent" ? (
+          <>
             <div className="col-md-6">
               <div className="mb-3">
                 <label
@@ -146,53 +155,61 @@ const RegistrationForm = ({
                   name="rollNo"
                   value={user.rollNo}
                   onChange={(e) => handleFieldChange(e)}
+                  placeholder="Please Enter Your Roll Number Here"
                 />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleInputAgeGroup"
-                  className="inputFieldLabelExtended"
-                >
-                  Age Group
-                </label>
-                <select
-                  className="form-control"
-                  id="exampleInputAgeGroup"
-                  name="ageGroup"
-                  value={user.ageGroup}
-                  onChange={(e) => handleFieldChange(e)}
-                >
-                  <option value="">Select Age Group</option>
-                  <option value="3-5">3-5</option>
-                  <option value="5-9">5-9</option>
-                  <option value="9+">9+</option>
-                </select>
-              </div>
+          </>
+        ) : null}
+        {selectedOption === "child" ? (
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label
+                htmlFor="exampleInputAgeGroup"
+                className="inputFieldLabelExtended"
+              >
+                Age Group{" "}
+              </label>
+              <select
+                className="form-control"
+                id="exampleInputAgeGroup"
+                name="ageGroup"
+                value={user.ageGroup}
+                onChange={(e) => handleFieldChange(e)}
+                placeholder="Please select the Age Group Category Here"
+              >
+                <option value="">Select Age Group</option>
+                <option value="3-5">3-5</option>
+                <option value="5-9">5-9</option>
+                <option value="9+">9+</option>
+              </select>
             </div>
           </div>
-        </>
-      ) : null}
+        ) : null}
+      </div>
 
       <div className="side-by-side">
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label
-              htmlFor="exampleInputteacher"
-              className="inputFieldLabelExtended"
-            >
-              {selectedOption === "child" ? "Teacher ID" : "ID"}
-            </label>
-            <input
-              className="form-control"
-              id="exampleInputteacher"
-              name="teacherId"
-              value={user.teacherId}
-              onChange={(e) => handleFieldChange(e)}
-            />
+        {selectedOption !== "parent" &&
+        (selectedOption === "child" || selectedOption === "teacher") ? (
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label
+                htmlFor="exampleInputteacher"
+                className="inputFieldLabelExtended"
+              >
+                Teacher ID
+              </label>
+              <input
+                className="form-control"
+                id="exampleInputteacher"
+                name="teacherId"
+                value={user.teacherId}
+                onChange={(e) => handleFieldChange(e)}
+                placeholder="Please Enter Teacher's ID Here"
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </>
   );

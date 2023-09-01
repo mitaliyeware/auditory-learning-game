@@ -1,0 +1,121 @@
+/* This creates the upper trapezoid shape of the beaker */
+.beaker-container {
+  width: 150px;
+  height: 200px;
+  background: lightblue;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* This creates the upper trapezoid shape of the beaker */
+.beaker-container::before {
+  content: "";
+  position: absolute;
+  border-bottom: 30px solid lightblue;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  width: 140px;
+  height: 0;
+  top: -29px; /* Adjust according to border-bottom */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Optional: This will add a bottom to the beaker */
+.beaker-container::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: lightblue;
+}
+
+.rectangle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.rectangle {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  background-color: transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 100px;
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.random-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.check-button {
+  display: block;
+  margin: 10px auto;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sound-button {
+  width: 70px;
+  height: 70px;
+}
+
+/* ... Your other styles ... */
+
+.inner-box {
+  width: 70px;
+  height: 70px;
+  margin: 5px;
+  background-color: #ddd;
+}
+
+.square-box {
+  width: 70px;
+  height: 70px;
+  background-color: #ddd;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 5px;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.timer-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* You can adjust this for spacing between icon and text */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Optional, to give it some background for readability */
+  padding: 5px;
+  border-radius: 5px;
+}

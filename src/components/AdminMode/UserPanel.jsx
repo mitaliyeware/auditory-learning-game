@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import TeacherDashboard from "./TeacherDashboard";
-import Profile from "./Profile";
+import Profile from "../Profile";
 import UploadMedia from "./UploadMedia";
+import GameSelect from "../GameSelect";
+import StudentPerformance from "./StudentPerformance";
 
 const UserPanel = ({ userDetails }) => {
   const [currentView, setCurrentView] = useState("dashboard");
@@ -29,7 +31,19 @@ const UserPanel = ({ userDetails }) => {
                 {currentView === "dashboard" && (
                   <TeacherDashboard userDetails={userDetails} />
                 )}
-                {currentView === "upload" && <UploadMedia />}
+                {currentView === "upload" && <GameSelect />}
+                {currentView === "profile" && <Profile />}
+              </div>
+            ) : null}
+
+            {userDetails?.userType === "parent" ? (
+              <div className="col-10">
+                {/* <Routes>
+                  <Route exact path="/dashboard" Component={TeacherDashboard} />
+                </Routes> */}
+                {/* <TeacherDashboard userDetails={userDetails} /> */}
+                {currentView === "dashboard" && <StudentPerformance />}
+                {currentView === "upload" && <GameSelect />}
                 {currentView === "profile" && <Profile />}
               </div>
             ) : null}

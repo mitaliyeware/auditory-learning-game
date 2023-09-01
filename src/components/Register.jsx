@@ -47,7 +47,10 @@ const Register = () => {
       password: user.password,
       contact: user.phone,
       birthDate: user.birthDate,
-      rollNo: selectedOption === "child" ? user.rollNo : undefined,
+      rollNo:
+        selectedOption === "child" || selectedOption === "parent"
+          ? user.rollNo
+          : undefined,
       ageGroup: selectedOption === "child" ? user.ageGroup : undefined,
       teacherId: Number(user.teacherId),
       userType: selectedOption,
@@ -104,6 +107,16 @@ const Register = () => {
                 onChange={handleOptionChange}
               />
               Register as a Teacher
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                value="parent"
+                checked={selectedOption === "parent"}
+                onChange={handleOptionChange}
+              />
+              Register as a Parent
             </label>
           </div>
           {/* <form id="signUpFormContainer" onSubmit={handleSubmit} method="POST"> */}

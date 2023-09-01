@@ -62,5 +62,73 @@
   display: flex;
   justify-content: center;
   gap: 6rem;
-  font-size: 2rem;
+  font-size: 1rem;
+}
+
+/* Game card*/
+.custom-card {
+  margin: 20px;
+  max-width: 300px;
+  max-height: 433px;
+  width: 200px; /* Adjust the value as per your requirement */
+  overflow: hidden; /* To ensure content doesn't spill out of the card if it exceeds the height */
+  /* any other styles you want to add */
+}
+
+.card-img-top {
+  max-width: 60%; /* Set the maximum width */
+  max-height: 60%; /* Set the maximum height */
+  display: block; /* To center the image */
+  margin: 50px; /* To center the image */
+}
+
+.button-image {
+  width: 50px; /* Adjust as needed */
+  height: 50px; /* Adjust as needed */
+  margin-bottom: 10px; /* Space between image and label */
+}
+
+/* Custom button size */
+.big-button {
+  width: 170px; /* Adjust as required */
+  height: 170px; /* Adjust as required */
+  padding: 20px; /* Adjust as required */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-image {
+  width: 100px; /* Adjust as required */
+  height: 100px; /* Adjust as required */
+}
+
+/* add border to update fields*/
+.bordered-fields {
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.btn-success-soft {
+  color: #28a745;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+.btn-danger-soft {
+  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.upload-box {
+  display: inline-block;
+  width: 150px; /* Making the box bigger */
+  height: 150px; /* Making the box bigger */
+  background-color: #f7f7f7; /* or any desired color */
+  border: 2px solid #ccc;
+  border-radius: 4px; /* for rounded corners, can be omitted */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.upload-box:hover {
+  background-color: #e5e5e5; /* light hover effect */
 }

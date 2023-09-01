@@ -1,0 +1,58 @@
+.rectangles-container {
+  display: flex;
+  justify-content: center; /* Aligns the rectangles in center */
+}
+
+.rectangles {
+  display: flex;
+  flex-direction: column; /* Stack the children vertically */
+  justify-content: center; /* Centers the squares vertically */
+  align-items: center; /* Centers the squares horizontally */
+  width: 150px; /* Width of the rectangle, adjust as desired */
+  height: 250px; /* Height of the rectangle, adjust as desired */
+  /* background-color: #ccc; Background color of the rectangle */
+  background-color: transparent;
+  margin: 15px; /* Space between rectangles */
+  border: 1px solid black; /* Border for the rectangle */
+}
+
+.square-box {
+  width: 100px; /* Width of the larger square */
+  height: 100px; /* Height of the larger square */
+  background-color: #333;
+  margin: 10px; /* Space between the larger and smaller square */
+  border-radius: 15px;
+}
+
+.sound-box {
+  width: 70px; /* Width of the smaller square */
+  height: 70px; /* Height of the smaller square */
+  background-color: #666;
+  border-radius: 7.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sound-button {
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+}
+
+.rectangle-item {
+  display: flex;
+  align-items: center; /* This is optional, depending on your design */
+}
+
+.check-button {
+  display: block;
+  margin: 10px auto;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
