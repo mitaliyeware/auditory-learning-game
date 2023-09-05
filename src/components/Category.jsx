@@ -1,17 +1,37 @@
-import React, { useState } from "react";
-import UploadMedia from "./AdminMode/UploadMedia.jsx";
+import React from "react";
+import { useDispatch } from "react-redux";
+// import UploadMedia from "./AdminMode/UploadMedia.jsx";
+// import LearnObjects from "./Kids/LearnObjects.jsx";
+import { selectCategory } from "../utils/categorySlice.js";
+import { useNavigate } from "react-router-dom";
 
-const Category = () => {
-  const [showUpload, setShowUpload] = useState(false);
+const Category = ({ userDetails }) => {
+  //const [showUpload, setShowUpload] = useState(false);
+  //const [currentView, setCurrentView] = useState("");
+  //const { setSelectedCategory } = useContext(CategoryContext);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleCardClick = (categoryName) => {
     console.log(`Selected category: ${categoryName}`);
-    setShowUpload(true);
+    dispatch(selectCategory(categoryName));
+
+    if (
+      userDetails?.userType === "teacher" ||
+      userDetails?.userType === "parent"
+    ) {
+      console.log("Navigating to /AdminMode/UploadMedia");
+      navigate("/adminmode/uploadmedia");
+    } else if (userDetails?.userType === "child") {
+      console.log("Navigating to /learnObjects");
+      navigate("/kids/learnobjects");
+    }
   };
 
-  if (showUpload) {
-    return <UploadMedia />;
-  }
+  // if (showUpload) {
+  //   return <UploadMedia category={selectedCategory} />;
+  // }
+
   return (
     <>
       <div className="row mx-5 my-5 mt-5">

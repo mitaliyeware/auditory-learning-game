@@ -132,3 +132,18 @@
 .upload-box:hover {
   background-color: #e5e5e5; /* light hover effect */
 }
+
+/*Upload Media*/
+/* This is for the enabled state */
+.btn.upload-btn {
+  background-color: blue;
+  border-color: blue;
+  color: #fff; /* Assuming white text on a blue button */
+}
+
+/* This is for the disabled state */
+.btn.upload-btn:disabled {
+  background-color: #ddd; /* Grayish color, for example */
+  border-color: #aaa; /* Slightly darker border for some depth */
+  cursor: not-allowed; /* Indicates the button is not clickable */
+}

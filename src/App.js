@@ -12,6 +12,13 @@ import UserPanel from "./components/AdminMode/UserPanel";
 import TeacherDashboard from "./components/AdminMode/TeacherDashboard";
 import Category from "./components/Category";
 import PeculiarPick from "./components/Games/PeculiarPick";
+import TargetTuck from "./components/Games/TargetTuck";
+import DigitDashy from "./components/Games/DigitDashy";
+import MatchMasters from "./components/Games/MatchMasters";
+import PlayGame from "./components/Kids/PlayGame";
+import TaskSelect from "./components/Kids/TaskSelect";
+import UploadMedia from "./components/AdminMode/UploadMedia";
+import LearnObjects from "./components/Kids/LearnObjects";
 
 function App() {
   return (
@@ -19,13 +26,17 @@ function App() {
       <Header />
       <Routes>
         {/* <Route exact path="/" Component={Home} /> */}
-
-        <Route exact path="/login" Component={Login} />
-        <Route exact path="/register" Component={Register} />
-        <Route exact path="/user" Component={UserPanel} />
-        <Route exact path="/user/dashboard" Component={TeacherDashboard} />
+        <Route exact path="/" Component={LearnObjects} />
+        <Route path="/login" Component={Login} />
+        <Route path="/register" Component={Register} />
+        <Route path="/user" Component={UserPanel} />
+        <Route path="/user/dashboard" Component={TeacherDashboard} />
         <Route path="/user/gameselect" element={<GameSelect />} />
         <Route path="/user/gameselect/category" element={<Category />} />
+        <Route path="/taskselect/learn" element={<Category />} />
+        <Route path="/taskselect/playgame" element={<PlayGame />} />
+        <Route path="/adminmode/uploadmedia" element={<UploadMedia />} />
+        <Route path="/kids/learnobjects" element={<LearnObjects />} />
       </Routes>
 
       {/* teacher(admin) page*/}

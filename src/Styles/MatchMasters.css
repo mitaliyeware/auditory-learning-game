@@ -1,26 +1,28 @@
 /* Match Masters*/
-.rectangle-container {
+.rectangle-container-mm {
   display: flex;
   /*flex-direction: column; /* Changed from row to column */
   align-items: center;
   justify-content: center;
+
   height: 100vh;
 }
 
-.rectangles {
+.rectangles-mm {
   display: flex;
   justify-content: center;
 }
 
-.rectangle {
+.rectangle-mm {
   width: 200px;
   height: 350px;
   background-color: #ccc;
   margin: 60px;
   border: 1px solid black;
+  justify-content: center;
 }
 
-.square-box {
+.square-box-mm {
   width: 90px;
   height: 90px;
   border: 1px solid black;
@@ -34,12 +36,12 @@
   cursor: pointer;
 }
 
-.sound-button {
+.sound-button-mm {
   width: 70px;
   height: 70px;
 }
 
-.check-button {
+.check-button-mm {
   display: block;
   margin: 10px auto;
   padding: 5px 10px;
@@ -51,7 +53,7 @@
   font-size: 14px;
 }
 
-.timer-content {
+.timer-content-mm {
   position: absolute;
   top: 0;
   right: 0;
@@ -64,6 +66,16 @@
     255,
     0.8
   ); /* Optional, to give it some background for readability */
-  padding: 5px; /* Optional, spacing around the content */
-  border-radius: 5px; /* Optional, to give it rounded edges */
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.drawing-canvas {
+  border: 1px solid #ccc;
+}
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

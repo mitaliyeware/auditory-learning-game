@@ -22,24 +22,24 @@ const PeculiarPick = () => {
   }, [timeLeft]);
   return (
     <>
-      <div className="rectangle-container">
+      <div className="rectangle-container-pp">
         {/* <div className="rectangle">{generateBoxes(randomNumber)}</div> */}
-        <div className="rectangle">
+        <div className="rectangle-pp">
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
+          <div className="square-box"></div>
           {/* Loop through an array of length `randomNumber` and render boxes
           {Array.from({ length: randomNumber }).map((_, index) => (
             <div key={index} className="inner-box"></div>
           ))} */}
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
-          <div className="square-box"></div>
         </div>
-        <div className="beaker-container">
+        <div className="beaker-container-pp">
           <div className="random-number">{randomNumber}</div>{" "}
         </div>
         <div className="timer-content">

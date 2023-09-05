@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import UploadMedia from "./AdminMode/UploadMedia";
 import Category from "./Category";
 
 const GameSelect = () => {

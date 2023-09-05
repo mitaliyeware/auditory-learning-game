@@ -1,0 +1,12 @@
+.rectangle-container-game {
+  display: flex;
+  justify-content: space-between; /* this will add space in between each box */
+}
+
+.square-box-game {
+  width: 100px; /* or whatever size you want */
+  height: 100px;
+  background-color: #333; /* or any color you prefer */
+  cursor: pointer; /* makes it appear clickable */
+  border: 2px solid #555; /* an optional border for aesthetics */
+}

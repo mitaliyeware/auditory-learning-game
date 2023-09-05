@@ -1,0 +1,28 @@
+.rectangle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.clickable-box {
+  width: 100px;
+  height: 100px;
+  margin: 10px; /* Adjust the margin as needed */
+  cursor: pointer;
+  display: inline-flex; /* Keep this as inline-flex */
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 2px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clickable-box img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.clickable-box:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Slight shade on hover */
+}

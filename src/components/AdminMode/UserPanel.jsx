@@ -5,20 +5,24 @@ import Profile from "../Profile";
 import UploadMedia from "./UploadMedia";
 import GameSelect from "../GameSelect";
 import StudentPerformance from "./StudentPerformance";
+import TaskSelect from "../Kids/TaskSelect";
 
 const UserPanel = ({ userDetails }) => {
   const [currentView, setCurrentView] = useState("dashboard");
   return (
     <>
+      console.log(userDetails);
       {userDetails && (
         <div className="container-fluid bg-secondary min-vh-100">
           <div className="row">
             {/* <Router> */}
-            {userDetails?.userType !== "child" ? (
+            {userDetails?.userType === "child" ? (
+              // Directly show the TaskSelect component for child users
+              <div className="col-12">
+                <TaskSelect />
+              </div>
+            ) : userDetails?.userType !== "child" ? (
               <div className="col-2 bg-white vh-100">
-                {/* <Routes>
-                  <Route exact path="/" Component={Sidebar} />
-                </Routes> */}
                 <Sidebar changeView={setCurrentView} />
               </div>
             ) : null}
