@@ -1,4 +1,4 @@
-.rectangle-container {
+.rectangle-container-tt {
   display: flex;
   /*flex-direction: column; /* Changed from row to column */
   align-items: center;
@@ -8,12 +8,12 @@
   flex-direction: column;
 }
 
-.rectangles {
+.rectangles-tt {
   display: flex;
   justify-content: center;
 }
 
-.square-box {
+.square-box-tt {
   width: 100px;
   height: 100px;
   background-color: #333;
@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.beaker {
+.beaker-tt {
   width: 150px;
   height: 200px;
   background: lightblue;
@@ -42,16 +42,16 @@
 }
 
 /* This creates the upper trapezoid shape of the beaker */
-.beaker-container {
+.beaker-container-tt {
   width: 150px;
-  height: 200px;
+  height: 150px;
   background: lightblue;
   position: relative;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 /* This creates the upper trapezoid shape of the beaker */
-.beaker-container::before {
+.beaker-container-tt::before {
   content: "";
   position: absolute;
   border-bottom: 30px solid lightblue;
@@ -65,7 +65,7 @@
 }
 
 /* Optional: This will add a bottom to the beaker */
-.beaker-container::after {
+.beaker-container-tt::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -75,9 +75,10 @@
   background-color: lightblue;
 }
 
-.square-button {
+.square-button-tt {
   width: 100px;
   height: 100px;
+
   background-color: transparent;
   border: none;
   margin: 0;
@@ -85,16 +86,16 @@
   cursor: pointer;
 }
 
-.square-button:hover {
+/* .square-button-tt:hover {
   background-color: rgba(
     0,
     0,
     0,
     0.1
-  ); /* Slight change on hover for a subtle effect */
-}
+  ); 
+} */
 
-.check-button {
+.check-button-tt {
   display: block;
   margin: 10px auto;
   padding: 5px 10px;
@@ -106,11 +107,15 @@
   font-size: 14px;
 }
 
-.rectangles-wrapper {
+.rectangles-wrapper-tt {
   position: relative;
 }
 
-.timer-content {
+.check-box-tt {
+  width: 80px; /* or whatever width you want */
+  height: auto; /* maintain aspect ratio */
+}
+.timer-content-tt {
   position: absolute;
   top: 0;
   right: 0;
@@ -125,4 +130,13 @@
   ); /* Optional, to give it some background for readability */
   padding: 5px;
   border-radius: 5px;
+}
+
+.sound-button-tt {
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-top: 50px;
 }

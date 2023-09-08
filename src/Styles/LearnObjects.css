@@ -1,7 +1,7 @@
 .rectangle-container-lo {
   display: flex;
   justify-content: center; /* Aligns the rectangles in center */
-  position: relative;
+
   padding: 20px;
 }
 
@@ -10,7 +10,7 @@
   flex-direction: column; /* Stack the children vertically */
   justify-content: center; /* Centers the squares vertically */
   align-items: center; /* Centers the squares horizontally */
-  width: 150px;
+  width: 200px;
   height: 250px;
   background-color: transparent;
   margin: 15px;
@@ -18,15 +18,17 @@
 }
 
 .square-box-lo {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   background-color: #333;
   margin: 10px;
   border-radius: 15px;
+  align-items: center;
+  justify-content: center;
 }
 
 .sound-box-lo {
-  width: 70px;
+  width: 120px;
   height: 70px;
   background-color: #666;
   border-radius: 7.5px;

@@ -4,7 +4,7 @@
   /*flex-direction: column; /* Changed from row to column */
   align-items: center;
   justify-content: center;
-
+  /* position: relative; */
   height: 100vh;
 }
 
@@ -15,16 +15,17 @@
 
 .rectangle-mm {
   width: 200px;
-  height: 350px;
+  height: 400px;
   background-color: #ccc;
   margin: 60px;
   border: 1px solid black;
   justify-content: center;
+  position: relative;
 }
 
 .square-box-mm {
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -34,6 +35,8 @@
   background: none;
   outline: none;
   cursor: pointer;
+  /* z-index: 2;
+  position: relative; */
 }
 
 .sound-button-mm {
@@ -72,10 +75,13 @@
 
 .drawing-canvas {
   border: 1px solid #ccc;
+  /* z-index: 1; */
 }
 canvas {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -1; /* Set z-index to 1 so it's above the rectangle container but below the boxes */
+  /* width: 100%; /* Ensure the canvas takes the full width of its parent */
+  /* height: 100%; Ensure the canvas takes the full height of its parent */
 }

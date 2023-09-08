@@ -17,8 +17,9 @@ import DigitDashy from "./components/Games/DigitDashy";
 import MatchMasters from "./components/Games/MatchMasters";
 import PlayGame from "./components/Kids/PlayGame";
 import TaskSelect from "./components/Kids/TaskSelect";
-import UploadMedia from "./components/AdminMode/UploadMedia";
+import UploadMedia from "./components/UploadMedia";
 import LearnObjects from "./components/Kids/LearnObjects";
+import { store } from "./utils/store";
 
 function App() {
   return (
@@ -26,17 +27,21 @@ function App() {
       <Header />
       <Routes>
         {/* <Route exact path="/" Component={Home} /> */}
-        <Route exact path="/" Component={LearnObjects} />
+        <Route exact path="/" Component={TaskSelect} />
         <Route path="/login" Component={Login} />
         <Route path="/register" Component={Register} />
         <Route path="/user" Component={UserPanel} />
         <Route path="/user/dashboard" Component={TeacherDashboard} />
-        <Route path="/user/gameselect" element={<GameSelect />} />
-        <Route path="/user/gameselect/category" element={<Category />} />
-        <Route path="/taskselect/learn" element={<Category />} />
+        {/* <Route path="/user/gameselect" element={<GameSelect />} /> */}
+        <Route path="/category" element={<Category />} />
+        <Route path="/learnobjects" element={<LearnObjects />} />
         <Route path="/taskselect/playgame" element={<PlayGame />} />
-        <Route path="/adminmode/uploadmedia" element={<UploadMedia />} />
-        <Route path="/kids/learnobjects" element={<LearnObjects />} />
+        <Route path="/admin/uploadmedia" element={<UploadMedia />} />
+        {/* <Route path="/kids/learnobjects" element={<LearnObjects />} /> */}
+        <Route path="/games/matchmasters" element={<MatchMasters />} />
+        <Route path="/games/digitdashy" element={<DigitDashy />} />
+        <Route path="/games/peculiarpick" element={<PeculiarPick />} />
+        <Route path="/games/targettuck" element={<TargetTuck />} />
       </Routes>
 
       {/* teacher(admin) page*/}

@@ -54,6 +54,23 @@ const Profile = () => {
     setUserData((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const deleteProfile = async () => {
+    try {
+      const response = await fetch(`/profile?email=${userData.email}`, {
+        method: "DELETE",
+      });
+
+      if (response.status === 200) {
+        console.log("Profile deleted successfully");
+        // Here you can add logic to redirect the user to a different page or log them out
+      } else {
+        console.error("Error deleting profile");
+      }
+    } catch (error) {
+      console.error("There was an error deleting the profile:", error);
+    }
+  };
+
   // const setDateOfBirth = (birthDate) => {
   //   const birthday = new Date(birthDate);
   //   const date = birthday?.getDate();
@@ -268,7 +285,11 @@ const Profile = () => {
       </details>
       <div className="side-by-side"></div>
       <div className="gap-3 d-md-flex justify-content-md-end text-center">
-        <button type="button" className="btn btn-danger btn-lg">
+        <button
+          type="button"
+          className="btn btn-danger btn-lg"
+          onClick={deleteProfile}
+        >
           Delete profile
         </button>
         <button

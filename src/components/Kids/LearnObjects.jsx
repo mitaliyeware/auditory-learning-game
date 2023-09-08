@@ -1,17 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import "../../Styles/LearnObjects.css";
+//import { selectCategory } from "../utils/categorySlice";
 
 const LearnObjects = () => {
   const [learnData, setLearnData] = useState([]);
   const audioRef = useRef(null); // 1. Create a reference to the audio element
+  const selectedCategory = useSelector((state) => state.category.category);
 
   useEffect(() => {
-    getLearnData();
-  }, []);
+    console.log("LearnObjects component mounted");
+    getLearnData(selectedCategory);
+  }, [selectedCategory]);
 
   const getLearnData = async () => {
     try {
-      const res = await fetch("/learn");
+      const res = await fetch(`/learn?category=${selectedCategory}`);
       const response = await res.json();
       setLearnData(response);
     } catch (error) {

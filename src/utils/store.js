@@ -3,13 +3,15 @@ import loginSlice from "./loginSlice";
 import appSlice from "./appSlice";
 import categorySlice from "./categorySlice";
 import mediaSlice from "./mediaSlice";
+import gameSelectSlice from "./gameSelectSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice,
     login: loginSlice,
     category: categorySlice,
-    media: mediaSlice,
+    gamePath: gameSelectSlice,
+    // media: mediaSlice,
   },
 });
 

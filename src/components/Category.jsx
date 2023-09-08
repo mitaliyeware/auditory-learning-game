@@ -1,36 +1,29 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-// import UploadMedia from "./AdminMode/UploadMedia.jsx";
-// import LearnObjects from "./Kids/LearnObjects.jsx";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import UploadMedia from "./UploadMedia.jsx";
+import LearnObjects from "./Kids/LearnObjects.jsx";
 import { selectCategory } from "../utils/categorySlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Category = ({ userDetails }) => {
   //const [showUpload, setShowUpload] = useState(false);
-  //const [currentView, setCurrentView] = useState("");
-  //const { setSelectedCategory } = useContext(CategoryContext);
+  // const [currentView, setCurrentView] = useState("");
+  // const { setSelectedCategory } = useContext(CategoryContext);
+  const selectedCategory = useSelector((state) => state.category.selected);
+  const selectedGamePath = useSelector((state) => state.gamePath);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleCardClick = (categoryName) => {
     console.log(`Selected category: ${categoryName}`);
     dispatch(selectCategory(categoryName));
-
-    if (
-      userDetails?.userType === "teacher" ||
-      userDetails?.userType === "parent"
-    ) {
-      console.log("Navigating to /AdminMode/UploadMedia");
-      navigate("/adminmode/uploadmedia");
-    } else if (userDetails?.userType === "child") {
-      console.log("Navigating to /learnObjects");
-      navigate("/kids/learnobjects");
+    //setShowUpload(true);
+    if (selectedGamePath) {
+      navigate(selectedGamePath);
+    } else {
+      navigate("/learnobjects");
     }
   };
-
-  // if (showUpload) {
-  //   return <UploadMedia category={selectedCategory} />;
-  // }
 
   return (
     <>
@@ -125,8 +118,28 @@ const Category = ({ userDetails }) => {
           </button>
         </div>
       </div>
+      {/* {showUpload && <UploadMedia category={selectedCategory} />} */}
     </>
   );
 };
 
 export default Category;
+
+// console.log("Navigating to /AdminMode/UploadMedia");
+// navigate("/admin/uploadmedia");
+//   if (
+//     userDetails?.userType === "teacher" ||
+//     userDetails?.userType === "parent"
+//   ) {
+//     console.log("Navigating to /AdminMode/UploadMedia");
+//     navigate("/adminmode/uploadmedia");
+//   } else if (userDetails?.userType === "child") {
+//     console.log("Navigating to /learnObjects");
+//     navigate("/kids/learnobjects");
+//   }
+// };
+
+// if (showUpload) {
+//   // return <UploadMedia />;
+//   return <UploadMedia category={selectedCategory} />;
+// }
