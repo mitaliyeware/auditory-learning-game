@@ -1,0 +1,21 @@
+/* .box-container-cc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 1.5rem;
+}
+
+.box-container-cc .box {
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  border-radius: 2rem;
+  outline: 0.1rem solid;
+}
+
+.box-container-cc .box img {
+  height: 8rem;
+}
+
+.box-container-cc .box:hover img {
+  transform: scale(1.1);
+} */

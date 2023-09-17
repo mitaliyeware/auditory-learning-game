@@ -48,10 +48,10 @@ const Register = () => {
       contact: user.phone,
       birthDate: user.birthDate,
       rollNo:
-        selectedOption === "child" || selectedOption === "parent"
+        selectedOption === "kid" || selectedOption === "parent"
           ? user.rollNo
           : undefined,
-      ageGroup: selectedOption === "child" ? user.ageGroup : undefined,
+      ageGroup: selectedOption === "kid" ? user.ageGroup : undefined,
       teacherId: Number(user.teacherId),
       userType: selectedOption,
     };
@@ -83,7 +83,9 @@ const Register = () => {
 
   return (
     <div id="homeDiv">
-      <div id="signUpMainDiv" className="container shadow my-5">
+      <div
+        id="signUpMainDiv"
+        className="container shadow my-5">
         <div className="row justify-content-end">
           <h1 className="display-6 fw-bolder mb-5">Registration Form</h1>
 
@@ -92,11 +94,11 @@ const Register = () => {
               <input
                 type="radio"
                 name="userType"
-                value="child"
-                checked={selectedOption === "child"}
+                value="kid"
+                checked={selectedOption === "kid"}
                 onChange={handleOptionChange}
               />
-              Register as a Child
+              Register as a Kid
             </label>
             <label>
               <input
@@ -134,8 +136,7 @@ const Register = () => {
                     <button
                       //type="submit"
                       className="btn btn-outline-light btn-primary w-50 pb-2 rounded-pill"
-                      onClick={(e) => handleSubmit(e)}
-                    >
+                      onClick={(e) => handleSubmit(e)}>
                       Register
                     </button>
                   </div>
@@ -143,8 +144,7 @@ const Register = () => {
                     <p className="lead text-center ms-auto">Existing User?</p>
                     <NavLink
                       to="/login"
-                      className="btn btn-outline-light rounded-pill pb-2 w-50 ms-auto px-4 "
-                    >
+                      className="btn btn-outline-light rounded-pill pb-2 w-50 ms-auto px-4 ">
                       <i className="fa fa-sign-in me-2"></i>
                       Login
                     </NavLink>

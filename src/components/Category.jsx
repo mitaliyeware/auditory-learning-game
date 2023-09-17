@@ -1,38 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UploadMedia from "./UploadMedia.jsx";
-import LearnObjects from "./Kids/LearnObjects.jsx";
 import { selectCategory } from "../utils/categorySlice.js";
 import { useNavigate } from "react-router-dom";
+import "../Styles/Category.css";
 
-const Category = ({ userDetails }) => {
-  //const [showUpload, setShowUpload] = useState(false);
-  // const [currentView, setCurrentView] = useState("");
-  // const { setSelectedCategory } = useContext(CategoryContext);
-  const selectedCategory = useSelector((state) => state.category.selected);
-  const selectedGamePath = useSelector((state) => state.gamePath);
+const Category = () => {
+  const selectedMode = useSelector((state) => state.category.mode);
+  const selectedGame = useSelector((state) => state.category.game);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleCardClick = (categoryName) => {
-    console.log(`Selected category: ${categoryName}`);
-    dispatch(selectCategory(categoryName));
-    //setShowUpload(true);
-    if (selectedGamePath) {
-      navigate(selectedGamePath);
-    } else {
-      navigate("/learnobjects");
-    }
+  const handleCardClick = (category) => {
+    console.log(`Selected category: ${category}`);
+    dispatch(selectCategory(category));
+    selectedMode === "learn"
+      ? navigate("/user/learnobjects")
+      : navigate(`/user/game/${selectedGame}`);
   };
 
   return (
-    <>
+    <div className="box-container">
+      <button
+        className="btn"
+        style={{ width: 50 }}
+        onClick={() =>
+          selectedMode === "learn"
+            ? navigate("/user/kid")
+            : navigate("/user/play")
+        }
+      >
+        <i
+          className="bi bi-arrow-left-circle-fill"
+          style={{ fontSize: "3rem" }}
+        ></i>
+      </button>
       <div className="row mx-5 my-5 mt-5">
         <h2 className="text-center">Category</h2>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Animals")}
+            onClick={() => handleCardClick("animals")}
           >
             <img
               src="/assets/animals.png"
@@ -41,18 +48,18 @@ const Category = ({ userDetails }) => {
             />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Birds")}
+            onClick={() => handleCardClick("birds")}
           >
             <img src="/assets/birds.png" alt="Birds" className="button-image" />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Vehicles")}
+            onClick={() => handleCardClick("vehicles")}
           >
             <img
               src="/assets/vehicles.png"
@@ -61,10 +68,10 @@ const Category = ({ userDetails }) => {
             />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("HumanBody")}
+            onClick={() => handleCardClick("humanBody")}
           >
             <img
               src="/assets/humanbody.png"
@@ -73,10 +80,10 @@ const Category = ({ userDetails }) => {
             />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Fruits")}
+            onClick={() => handleCardClick("fruits")}
           >
             <img
               src="/assets/fruits.png"
@@ -85,18 +92,21 @@ const Category = ({ userDetails }) => {
             />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        {/* <div className="col-md-3 position-relative mb-5">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Music")}
-          >
-            <img src="/assets/music.png" alt="Music" className="button-image" />
+            onClick={() => handleCardClick("music")}>
+            <img
+              src="/assets/music.png"
+              alt="Music"
+              className="button-image"
+            />
           </button>
-        </div>
-        <div className="col-md-3 position-relative mb-5">
+        </div> */}
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Nature")}
+            onClick={() => handleCardClick("nature")}
           >
             <img
               src="/assets/nature.png"
@@ -105,10 +115,10 @@ const Category = ({ userDetails }) => {
             />
           </button>
         </div>
-        <div className="col-md-3 position-relative mb-5">
+        <div className="col-md-3 position-relative mb-5 box">
           <button
             className="btn btn-outline-dark btn-lg d-flex flex-column align-items-center big-button"
-            onClick={() => handleCardClick("Sports")}
+            onClick={() => handleCardClick("sports")}
           >
             <img
               src="/assets/sports.png"
@@ -119,7 +129,7 @@ const Category = ({ userDetails }) => {
         </div>
       </div>
       {/* {showUpload && <UploadMedia category={selectedCategory} />} */}
-    </>
+    </div>
   );
 };
 

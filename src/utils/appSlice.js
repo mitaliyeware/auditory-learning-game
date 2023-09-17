@@ -12,8 +12,18 @@ const appSlice = createSlice({
     hideHomePage: (state) => {
       state.isHomePageVisible = false;
     },
+    toggleMenu: (state) => {
+      state.isMenuOpen = !state.isMenuOpen;
+    },
+    closeMenu: (state) => {
+      state.isMenuOpen = false;
+    },
+    openMenu: (state) => {
+      state.isMenuOpen = true;
+    },
   },
 });
 
 export default appSlice.reducer;
-export const { showHomePage, hideHomePage } = appSlice.actions;
+export const { showHomePage, hideHomePage, toggleMenu, closeMenu, openMenu } =
+  appSlice.actions;

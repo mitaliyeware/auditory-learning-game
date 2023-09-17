@@ -1,7 +1,7 @@
 .rectangle-container-lo {
   display: flex;
   justify-content: center; /* Aligns the rectangles in center */
-
+  flex-wrap: wrap;
   padding: 20px;
 }
 
@@ -13,8 +13,13 @@
   width: 200px;
   height: 250px;
   background-color: transparent;
-  margin: 15px;
+  margin: 10px;
   border: 1px solid black;
+  flex: 0 0 calc(25% - 20px); /* Minus margin to ensure they fit */
+  max-width: calc(
+    25% - 20px
+  ); /* Subtracting any margins you want between blocks */
+  box-sizing: border-box; /* Ensures any padding doesn't affect total width */
 }
 
 .square-box-lo {

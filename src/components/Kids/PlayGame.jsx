@@ -1,72 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectCategory } from "../../utils/categorySlice";
-import { setGamePath } from "../../utils/gameSelectSlice";
 import "../../Styles/PlayGame.css";
+import { selectGame } from "../../utils/categorySlice";
 
 const PlayGame = () => {
   const navigate = useNavigate();
-  const [selectedGame, setSelectedGame] = useState(""); // Store the selected game path
   const dispatch = useDispatch();
-  //   const handleBoxClick = (path) => {
-  //     setSelectedGame(path); // Set the selected game path
 
-  //     // Now, navigate to category selection instead of the game
-  //     navigate("/category");
-  //   };
-
-  // This function seems to be unused in your PlayGame component
-  // I'd recommend moving it to the Category component if not already present there
-  const handleCardClick = (categoryName) => {
-    dispatch(selectCategory(categoryName));
+  const handleBoxClick = (game) => {
+    dispatch(selectGame(game));
+    navigate(`/user/kid/play/category`);
+    // navigate(`/user/kid/game/${game}`);
   };
 
-  const handleBoxClick = (path) => {
-    dispatch(setGamePath(path));
-    navigate("/category");
-  };
   return (
     <>
+      <button
+        className="btn"
+        style={{ width: 50 }}
+        onClick={() => navigate("/user/kid")}
+      >
+        <i
+          className="bi bi-arrow-left-circle-fill"
+          style={{ fontSize: "3rem" }}
+        ></i>
+      </button>
       <div className="rectangle-container-game">
-        <div
-          className="square-box-game"
-          onClick={() => handleBoxClick("/games/matchmasters")}
-        >
+        <div className="square-box-game1">
           <img
             src="/assets/MatchMasters.png"
             alt="MatchMasters"
             className="button-image"
+            onClick={() => handleBoxClick("matchmasters")}
           />
         </div>
-        <div
-          className="square-box-game"
-          onClick={() => handleBoxClick("/games/targettuck")}
-        >
+        <div className="square-box-game2">
           <img
             src="/assets/TargetTuck.png"
             alt="TargetTuck"
             className="button-image"
+            onClick={() => handleBoxClick("targettuck")}
           />
         </div>
-        <div
-          className="square-box-game"
-          onClick={() => handleBoxClick("/games/digitdashy")}
-        >
+        <div className="square-box-game1">
           <img
             src="/assets/DigitDashy.png"
             alt="DigitDashy"
             className="button-image"
+            onClick={() => handleBoxClick("digitdashy")}
           />
         </div>
-        <div
-          className="square-box-game"
-          onClick={() => handleBoxClick("/games/peculiarpick")}
-        >
+        <div className="square-box-game2">
           <img
             src="/assets/PeculiarPick.png"
             alt="PeculiarPick"
             className="button-image"
+            onClick={() => handleBoxClick("peculiarpick")}
           />
         </div>
       </div>

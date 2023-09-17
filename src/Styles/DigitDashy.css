@@ -56,3 +56,38 @@
   cursor: pointer;
   font-size: 14px;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.timer-content-dd {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* You can adjust this for spacing between icon and text */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Optional, to give it some background for readability */
+  padding: 5px;
+  border-radius: 5px;
+}

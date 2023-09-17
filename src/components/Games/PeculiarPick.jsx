@@ -1,31 +1,73 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import "../../Styles/PeculiarPick.css";
+import { useNavigate } from "react-router-dom";
 
 const PeculiarPick = () => {
+  const selectedCategory = useSelector((state) => state.category.category);
+  const [droppedImages, setDroppedImages] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [result, setResult] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const [randomNumber, setRandomNumber] = useState(
     Math.floor(Math.random() * 9) + 1
   );
   const [timeLeft, setTimeLeft] = useState(60);
-  const [availableBoxes, setAvailableBoxes] = useState(
-    Array.from({ length: 9 }, (_, i) => i + 1)
-  );
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [selectedCategory, randomNumber]);
 
   useEffect(() => {
     if (timeLeft > 0) {
       const timerId = setTimeout(() => {
         setTimeLeft(timeLeft - 1);
       }, 1000);
-
-      // Cleanup timer when component unmounts or timeLeft changes
       return () => clearTimeout(timerId);
     } else {
       window.alert("Time's up!");
-      window.location.reload(); // Refreshes the page when time runs out
+      setTimeLeft(60);
+      refreshData();
     }
   }, [timeLeft]);
+  const refreshData = () => {
+    // Generate a new random number
+    setRandomNumber(Math.floor(Math.random() * 9) + 1);
+    setTimeLeft(60); // Reset the timer to 60 seconds
 
-  const handleDragStart = (e, boxNumber) => {
-    e.dataTransfer.setData("boxNumber", boxNumber.toString());
+    // Fetch new data
+    fetch(`/peculiarpick?category=${selectedCategory}`)
+      .then((res) => res.json())
+      .then((data) => {
+        let composedData = [];
+
+        // Use images of the selected category
+        while (composedData.length < randomNumber) {
+          const randomIndex = Math.floor(
+            Math.random() * data.selectedImages.length
+          );
+          composedData.push(data.selectedImages[randomIndex]);
+        }
+
+        // Fill the remaining spots with images from other categories
+        while (composedData.length < 9) {
+          const randomIndex = Math.floor(
+            Math.random() * data.otherImages.length
+          );
+          composedData.push(data.otherImages[randomIndex]);
+
+          // Remove that image from otherImages to avoid duplication
+          data.otherImages.splice(randomIndex, 1);
+        }
+
+        setQuestions(composedData);
+      })
+      .catch((error) => console.error("Error fetching questions:", error));
+  };
+
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData("questionIndex", index.toString());
   };
 
   const handleDragOver = (e) => {
@@ -34,29 +76,81 @@ const PeculiarPick = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const boxNumber = parseInt(e.dataTransfer.getData("boxNumber"), 10);
-    setAvailableBoxes((prevBoxes) =>
-      prevBoxes.filter((num) => num !== boxNumber)
+    const questionIndex = parseInt(e.dataTransfer.getData("questionIndex"), 10);
+    const droppedImage = questions[questionIndex];
+    setDroppedImages((prevImages) => [...prevImages, droppedImage]);
+    setQuestions((prevQuestions) =>
+      prevQuestions.filter((_, index) => index !== questionIndex)
     );
-
-    // Reduce the beaker's number by 1
     setRandomNumber((prevNumber) => prevNumber - 1);
   };
 
-  const handleRefresh = () => {
-    window.location.reload();
+  const handleCheck = () => {
+    if (
+      randomNumber === 0 &&
+      droppedImages.every((img) => img.selectedCategory === selectedCategory)
+    ) {
+      setResult("correct");
+    } else {
+      setResult("wrong");
+    }
+    setShowModal(true);
+    setTimeLeft(60); // Reset the timer
+  };
+
+  const handleContinue = () => {
+    setShowModal(false);
+    setRandomNumber(Math.floor(Math.random() * 9) + 1);
+    setDroppedImages([]);
+    setResult(null);
+    fetchQuestions();
+  };
+
+  const fetchQuestions = () => {
+    fetch(`/peculiarpick?category=${selectedCategory}`)
+      .then((res) => res.json())
+      .then((data) => {
+        let composedData = [];
+        while (composedData.length < randomNumber) {
+          const randomIndex = Math.floor(
+            Math.random() * data.selectedImages.length
+          );
+          composedData.push(data.selectedImages[randomIndex]);
+        }
+        while (composedData.length < 9) {
+          const randomIndex = Math.floor(
+            Math.random() * data.otherImages.length
+          );
+          composedData.push(data.otherImages[randomIndex]);
+          data.otherImages.splice(randomIndex, 1);
+        }
+        setQuestions(composedData);
+      })
+      .catch((error) => console.error("Error fetching questions:", error));
   };
   return (
     <>
+      <button
+        className="btn"
+        style={{ width: 50 }}
+        onClick={() => navigate("/user/kid/play/category")}
+      >
+        <i
+          className="bi bi-arrow-left-circle-fill"
+          style={{ fontSize: "3rem" }}
+        ></i>
+      </button>
       <div className="rectangle-container-pp">
         <div className="rectangle-pp">
-          {availableBoxes.map((boxNumber) => (
+          {questions.map((question, index) => (
             <div
-              key={boxNumber}
+              key={question.id}
               className="square-box-pp"
               draggable
-              onDragStart={(e) => handleDragStart(e, boxNumber)}
-            ></div>
+              onDragStart={(e) => handleDragStart(e, index)}
+            >
+              <img src={question.image} alt={question.name} />
+            </div>
           ))}
         </div>
         <div
@@ -75,13 +169,31 @@ const PeculiarPick = () => {
           <p>Time left: {timeLeft} seconds</p>
         </div>
       </div>
-      <button className="check-button-pp" onClick={handleRefresh}>
+      <button className="check-button-pp" onClick={handleCheck}>
         <img
           src="/assets/check.png"
           alt="Check Button"
           className="sound-button-pp"
         />
       </button>
+      <div className={`modal ${showModal ? "active" : ""}`}>
+        <div className="modal-content">
+          {result === "correct" && (
+            <>
+              <img src="/assets/correct.png" alt="Correct Answer" />
+              <p>Correct answer!</p>
+              <button onClick={handleContinue}>Continue</button>
+            </>
+          )}
+          {result === "wrong" && (
+            <>
+              <img src="/assets/wrong.png" alt="Wrong Answer" />
+              <p>Wrong answer!</p>
+              <button onClick={handleContinue}>Continue</button>
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
 };

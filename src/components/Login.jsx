@@ -50,7 +50,7 @@ const Login = () => {
         window.alert("User Logged In");
         console.log("Response: ", userDetails);
         dispatch(addUserDetails(userDetails));
-        navigate("/user");
+        navigate("/loginRedirect");
       }
     } catch (error) {
       console.log(error);
@@ -65,8 +65,7 @@ const Login = () => {
           <h5 className="mb-4">OR</h5>
           <NavLink
             to="/register"
-            className="btn btn-outline-light rounded-pill pb-2 w-50"
-          >
+            className="btn btn-outline-light rounded-pill pb-2 w-50">
             <i className="fa fa-user-plus me-2"></i>
             Register
           </NavLink>
@@ -75,7 +74,9 @@ const Login = () => {
           <h1 className="display-6 fw-bolder mb-5">LOGIN</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
+              <label
+                htmlFor="exampleInputEmail1"
+                className="form-label">
                 Email address
               </label>
               <input
@@ -89,7 +90,9 @@ const Login = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
+              <label
+                htmlFor="exampleInputPassword1"
+                className="form-label">
                 Password
               </label>
               <input
@@ -107,14 +110,15 @@ const Login = () => {
                 className="form-check-input"
                 id="exampleCheck1"
               />
-              <label className="form-check-label" htmlFor="exampleCheck1">
+              <label
+                className="form-check-label"
+                htmlFor="exampleCheck1">
                 Remember Me
               </label>
             </div>
             <button
               type="submit"
-              className="btn btn-primary w-100 mt-4 rounded-pill"
-            >
+              className="btn btn-primary w-100 mt-4 rounded-pill">
               Login
             </button>
             <div>

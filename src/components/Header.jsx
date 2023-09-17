@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUserDetails } from "../utils/loginSlice";
+import { toggleMenu } from "../utils/appSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,9 +33,23 @@ const Header = () => {
     }
   };
 
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light shadow">
+        {userDetails?.userType !== "kid" && (
+          <img
+            width={50}
+            height={50}
+            src="https://static.vecteezy.com/system/resources/previews/021/190/402/original/hamburger-menu-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg"
+            alt="Menu"
+            style={{ cursor: "pointer" }}
+            onClick={() => toggleMenuHandler()}
+          />
+        )}
         <div className="container">
           <button
             className="navbar-toggler"
@@ -79,12 +94,24 @@ const Header = () => {
               </>
             )}
             {userDetails && (
-              <button
-                className="btn btn-outline-primary ms-2 px-4 rounded-pill"
-                onClick={handleLogout}
-              >
-                <i className="fa fa-sign-out me-2"></i>Logout
-              </button>
+              <>
+                {`Hello, ${userDetails?.firstName}`}
+                <i
+                  // className="bi bi-person-circle"
+                  className="bi"
+                  style={{
+                    fontSize: "2rem",
+                    marginLeft: "0.5rem",
+                    marginRight: "0.5rem",
+                  }}
+                ></i>
+                <button
+                  className="btn btn-outline-primary ms-2 px-4 rounded-pill"
+                  onClick={handleLogout}
+                >
+                  <i className="fa fa-sign-out me-2"></i>Logout
+                </button>
+              </>
             )}
           </div>
         </div>

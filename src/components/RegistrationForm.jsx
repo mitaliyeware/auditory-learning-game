@@ -13,8 +13,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputFirstName"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               First Name
             </label>
             <input
@@ -36,8 +35,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputLastName"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               Last Name
             </label>
             <input
@@ -57,8 +55,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputEmail1"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               Email address
             </label>
             <input
@@ -79,8 +76,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputPassword1"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               Password
             </label>
             <input
@@ -101,8 +97,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputContact"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               Contact
             </label>
             <input
@@ -120,8 +115,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputBirthDate"
-              className="inputFieldLabelExtended"
-            >
+              className="inputFieldLabelExtended">
               Date of Birth
             </label>
             <input
@@ -139,14 +133,13 @@ const RegistrationForm = ({
         </div>
       </div>
       <div className="side-by-side">
-        {selectedOption === "child" || selectedOption === "parent" ? (
+        {selectedOption === "kid" || selectedOption === "parent" ? (
           <>
             <div className="col-md-6">
               <div className="mb-3">
                 <label
                   htmlFor="exampleInputRollNo"
-                  className="inputFieldLabelExtended"
-                >
+                  className="inputFieldLabelExtended">
                   Roll No
                 </label>
                 <input
@@ -161,13 +154,12 @@ const RegistrationForm = ({
             </div>
           </>
         ) : null}
-        {selectedOption === "child" ? (
+        {selectedOption === "kid" ? (
           <div className="col-md-6">
             <div className="mb-3">
               <label
                 htmlFor="exampleInputAgeGroup"
-                className="inputFieldLabelExtended"
-              >
+                className="inputFieldLabelExtended">
                 Age Group{" "}
               </label>
               <select
@@ -176,8 +168,7 @@ const RegistrationForm = ({
                 name="ageGroup"
                 value={user.ageGroup}
                 onChange={(e) => handleFieldChange(e)}
-                placeholder="Please select the Age Group Category Here"
-              >
+                placeholder="Please select the Age Group Category Here">
                 <option value="">Select Age Group</option>
                 <option value="3-5">3-5</option>
                 <option value="5-9">5-9</option>
@@ -190,13 +181,12 @@ const RegistrationForm = ({
 
       <div className="side-by-side">
         {selectedOption !== "parent" &&
-        (selectedOption === "child" || selectedOption === "teacher") ? (
+        (selectedOption === "kid" || selectedOption === "teacher") ? (
           <div className="col-md-6">
             <div className="mb-3">
               <label
                 htmlFor="exampleInputteacher"
-                className="inputFieldLabelExtended"
-              >
+                className="inputFieldLabelExtended">
                 Teacher ID
               </label>
               <input

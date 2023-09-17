@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const TeacherDashboard = () => {
-  const [students, setstudents] = useState([]);
-  // const [userData, setUserData] = useState(initialUserData);
-  const [deleteMessage, setDeleteMessage] = useState(null);
+const ParentDashboard = () => {
+  const [studentData, setStudentData] = useState([]);
   const userDetails = useSelector((store) => store.login?.userDetails[0]);
+  const [deleteMessage, setDeleteMessage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getStudents();
+    console.log(userDetails);
+    getStudentData();
   }, []);
 
-  const getStudents = async () => {
+  const getStudentData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3001/students?teacherId=${userDetails.teacherId}`,
+        `http://localhost:3001/student?rollNo=${userDetails.rollNo}`,
         {
           headers: {
             Accept: "application/json",
@@ -26,7 +26,7 @@ const TeacherDashboard = () => {
         }
       );
       const response = await res.json();
-      setstudents(response);
+      setStudentData(response);
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +50,7 @@ const TeacherDashboard = () => {
 
       if (response.status === 200) {
         setDeleteMessage("Profile deleted successfully");
-        setstudents((prevStudents) =>
+        setStudentData((prevStudents) =>
           prevStudents.filter((student) => student.email !== email)
         );
         // Here you can add logic to redirect the user to a different page or log them out
@@ -97,8 +97,8 @@ const TeacherDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {students && students.length > 0 ? (
-            students.map((student, index) => (
+          {studentData && studentData.length > 0 ? (
+            studentData.map((student, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{student.firstName}</td>
@@ -134,4 +134,4 @@ const TeacherDashboard = () => {
   );
 };
 
-export default TeacherDashboard;
+export default ParentDashboard;

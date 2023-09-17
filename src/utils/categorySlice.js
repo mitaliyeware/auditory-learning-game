@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  mode: "",
   category: "",
+  game: "",
 };
 
 const categorySlice = createSlice({
@@ -11,9 +13,17 @@ const categorySlice = createSlice({
     selectCategory: (state, action) => {
       state.category = action.payload;
     },
+    selectMode: (state, action) => {
+      state.mode = action.payload;
+      state.category = "";
+      state.game = "";
+    },
+    selectGame: (state, action) => {
+      state.game = action.payload;
+    },
   },
 });
 
-export const { selectCategory } = categorySlice.actions;
+export const { selectCategory, selectMode, selectGame } = categorySlice.actions;
 
 export default categorySlice.reducer;

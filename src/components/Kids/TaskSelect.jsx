@@ -1,41 +1,39 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/TaskSelect.css";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../utils/loginSlice";
-import Login from "../Login";
-import Register from "../Register";
+import { useDispatch } from "react-redux";
+import { selectMode } from "../../utils/categorySlice";
 
 const TaskSelect = () => {
-  const user = useSelector(selectUser);
   const navigate = useNavigate();
-  const handleButtonClick = (path) => {
-    navigate(path);
+  const dispatch = useDispatch();
+
+  const handleButtonClick = (mode) => {
+    dispatch(selectMode(mode));
+    mode === "learn"
+      ? navigate("/user/kid/learn/category")
+      : navigate("/user/play");
   };
 
-  //   if (user?.user.type !== "child") {
-  //     return <TaskSelect />;
-  //   } else {
-  //     return <Login />;
-  //   }
-
   return (
-    <>
-      <div className="rectangle-container">
-        <div
-          className="clickable-box"
-          onClick={() => handleButtonClick("/category")}
-        >
-          <img src="/assets/learn.png" alt="Learn" />
+    <div className="page-container-ts">
+      <div className="rectangle-container-ts">
+        <div className="clickable-box">
+          <img
+            src="/assets/learn.png"
+            alt="Learn"
+            onClick={() => handleButtonClick("learn")}
+          />
         </div>
-        <div
-          className="clickable-box"
-          onClick={() => handleButtonClick("/taskselect/playgame")}
-        >
-          <img src="/assets/play.png" alt="Play" />
+        <div className="clickable-box">
+          <img
+            src="/assets/play.png"
+            alt="Play"
+            onClick={() => handleButtonClick("play")}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

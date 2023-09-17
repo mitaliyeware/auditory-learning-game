@@ -15,12 +15,12 @@ const UserPanel = ({ userDetails }) => {
         <div className="container-fluid bg-secondary min-vh-100">
           <div className="row">
             {/* <Router> */}
-            {userDetails?.userType === "child" ? (
+            {userDetails?.userType === "kid" ? (
               // Directly show the TaskSelect component for child users
               <div className="col-12">
                 <TaskSelect />
               </div>
-            ) : userDetails?.userType !== "child" ? (
+            ) : userDetails?.userType !== "kid" ? (
               <div className="col-2 bg-white vh-100">
                 <Sidebar changeView={setCurrentView} />
               </div>

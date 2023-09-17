@@ -1,12 +1,41 @@
 .rectangle-container-game {
   display: flex;
-  justify-content: space-between; /* this will add space in between each box */
+  justify-content: center; /* Center horizontally on the screen */
+  align-items: center; /* Center vertically on the screen */
+  height: 100vh; /* Use the full height of the viewport */
+  background-color: #faeac3;
 }
 
-.square-box-game {
-  width: 100px; /* or whatever size you want */
-  height: 100px;
-  background-color: #333; /* or any color you prefer */
+.square-box-game1 {
+  width: 150px; /* or whatever size you want */
+  height: 150px;
+  display: flex;
+  justify-content: center; /* Center horizontally within the box */
+  align-items: center; /* Center vertically within the box */
+  background-color: #82cacd; /* or any color you prefer */
   cursor: pointer; /* makes it appear clickable */
   border: 2px solid #555; /* an optional border for aesthetics */
+  margin: 0 30px; /* Add spacing between boxes (adjust the value as needed) */
+  border-radius: 20px;
+}
+
+.square-box-game2 {
+  width: 150px; /* or whatever size you want */
+  height: 150px;
+  display: flex;
+  justify-content: center; /* Center horizontally within the box */
+  align-items: center; /* Center vertically within the box */
+  background-color: #ffaaa8; /* or any color you prefer */
+  cursor: pointer; /* makes it appear clickable */
+  border: 2px solid #555; /* an optional border for aesthetics */
+  margin: 0 30px; /* Add spacing between boxes (adjust the value as needed) */
+  border-radius: 20px;
+}
+
+/* Add media query for responsiveness */
+@media (max-width: 768px) {
+  .rectangle-container-game {
+    flex-direction: column; /* Stack boxes in a column on smaller screens */
+    align-items: center;
+  }
 }

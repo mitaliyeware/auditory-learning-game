@@ -8,6 +8,43 @@
   );
 }
 
+* {
+  font-family: "Poppins", sans-serif;
+  /* text-transform: capitalize; */
+  transition: all 0.2s linear;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+header {
+  background-color: white;
+}
+
+/* header */
+.container {
+  font-size: 1.7rem;
+  margin: 0 1rem;
+  color: var(--black);
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 9%;
+  background: var(--white);
+  box-shadow: var(--box-shadow); */
+}
+
+/* .nav-link.active:hover {
+  color: var(--orange);
+} */
+
 /*Teacher*/
 .list-group a:hover {
   background-color: #cb99c9;
@@ -146,4 +183,9 @@
   background-color: #ddd; /* Grayish color, for example */
   border-color: #aaa; /* Slightly darker border for some depth */
   cursor: not-allowed; /* Indicates the button is not clickable */
+}
+
+/*teacher dashboard*/
+.button-spacing {
+  margin-right: 10px; /* Adjust the margin value as needed */
 }

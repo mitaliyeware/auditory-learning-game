@@ -51,6 +51,7 @@ const UploadMedia = ({ userDetails }) => {
         name: `${fileName}_${uploadTime}`,
         image: base64String,
         fileType: "image",
+        selectedCategory: selectedCategory,
       });
     }
     if (e.target.files[0].type.includes("audio")) {
@@ -58,6 +59,7 @@ const UploadMedia = ({ userDetails }) => {
         name: `${fileName}_${uploadTime}`,
         audio: base64String,
         fileType: "audio",
+        selectedCategory: selectedCategory,
       });
     }
     console.log("Audio details: ", audioDetails);
@@ -65,7 +67,7 @@ const UploadMedia = ({ userDetails }) => {
 
   const uploadImage = async () => {
     try {
-      const { image, name } = imageDetails;
+      const { image, name, selectedCategory } = imageDetails;
       const res = await fetch("/upload-image", {
         method: "POST",
         headers: {
@@ -74,6 +76,7 @@ const UploadMedia = ({ userDetails }) => {
         body: JSON.stringify({
           image,
           name,
+          selectedCategory,
         }),
       });
 
@@ -83,6 +86,11 @@ const UploadMedia = ({ userDetails }) => {
         window.alert("Failed to upload Image");
       } else {
         console.log("Upload Image response: ", response);
+        console.log({
+          image,
+          name,
+          selectedCategory,
+        });
         return response.image;
       }
     } catch (error) {
@@ -92,7 +100,7 @@ const UploadMedia = ({ userDetails }) => {
 
   const uploadAudio = async () => {
     try {
-      const { audio, name } = audioDetails;
+      const { audio, name, selectedCategory } = audioDetails;
       const res = await fetch("/upload-audio", {
         method: "POST",
         headers: {
@@ -101,6 +109,7 @@ const UploadMedia = ({ userDetails }) => {
         body: JSON.stringify({
           audio,
           name,
+          selectedCategory,
         }),
       });
 
@@ -145,7 +154,7 @@ const UploadMedia = ({ userDetails }) => {
         setImageDetails({});
         setAudioDetails({});
         console.log("Generate question response: ", json);
-        window.location.reload();
+        //window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -187,9 +196,13 @@ const UploadMedia = ({ userDetails }) => {
             placeholder="Please select the Category Here first"
           >
             <option value="">Select Catgory</option>
-            <option value="Animals">Animals</option>
-            <option value="Birds">Birds</option>
-            <option value="Vehicles">Vehicles</option>
+            <option value="animals">Animals</option>
+            <option value="birds">Birds</option>
+            <option value="vehicles">Vehicles</option>
+            <option value="humanBody">Human Body</option>
+            <option value="sports">Sports</option>
+            <option value="fruits">Fruits</option>
+            <option value="nature">Nature</option>
           </select>
         </div>
         <div className="col-md-6 position-relative">
