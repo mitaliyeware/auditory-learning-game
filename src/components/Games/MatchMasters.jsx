@@ -9,6 +9,9 @@ const MatchMasters = () => {
   const [currentStartBox, setCurrentStartBox] = useState(null);
   const [learnData, setLearnData] = useState([]);
   const [imageToAudioMapping, setImageToAudioMapping] = useState({});
+  const [selectedImageId, setSelectedImageId] = useState("");
+  const [selectedPairs, setSelectedPairs] = useState([]);
+  const [questionsData, setQuestionsData] = useState([]);
   const selectedCategory = useSelector((state) => state.category.category);
   console.log("Selected Category:", selectedCategory);
   const navigate = useNavigate();
@@ -27,6 +30,34 @@ const MatchMasters = () => {
     getLearnData();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timerId = setTimeout(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    } else {
+      window.alert("Time's up!");
+      setLines([]);
+      setSelectedPairs([]);
+      getLearnData();
+      setTimeLeft(60);
+    }
+  }, [timeLeft]);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    drawLines();
+  }, [lines]);
+
   const getButtonCenter = (btn) => {
     const rect = btn.getBoundingClientRect();
     return {
@@ -41,10 +72,19 @@ const MatchMasters = () => {
       boxId,
       startPoint: startCenter,
     });
+    setSelectedImageId(e?.target?.children[0]?.getAttribute("imageid"));
   };
 
   const handleEnd = (e, boxId) => {
     if (!currentStartBox) return;
+
+    setSelectedPairs((prevValues) => [
+      ...prevValues,
+      {
+        imageId: selectedImageId,
+        audioId: e?.target?.children[0]?.children[0]?.getAttribute("audioid"),
+      },
+    ]);
 
     const endCenter = getButtonCenter(e.target);
 
@@ -82,32 +122,8 @@ const MatchMasters = () => {
       ctx.lineWidth = 2;
       ctx.stroke();
     });
+    console.log("Selected Pairs: ", selectedPairs);
   };
-
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const timerId = setTimeout(() => {
-        setTimeLeft(timeLeft - 1);
-      }, 1000);
-
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-      }
-
-      drawLines();
-
-      return () => {
-        clearTimeout(timerId);
-      };
-    } else {
-      window.alert("Time's up!");
-      setLines([]);
-      postTimeoutLearnData();
-      setTimeLeft(60);
-    }
-  }, [timeLeft, lines]);
 
   const handleRefresh = () => {
     setLines([]);
@@ -131,6 +147,8 @@ const MatchMasters = () => {
       }
       const res = await fetch(`/matchmasters?category=${selectedCategory}`);
       const response = await res.json();
+      setQuestionsData(response);
+      setSelectedPairs([]);
       const shuffledData = shuffleArray([...response]);
       const selectedData = shuffledData.slice(0, 4);
       const mapping = {};
@@ -153,42 +171,42 @@ const MatchMasters = () => {
     }
   };
 
-  const postTimeoutLearnData = async () => {
-    try {
-      if (!selectedCategory) {
-        console.log("Selected category is missing!");
-        return;
-      }
-      const res = await fetch(`/matchmasters?category=${selectedCategory}`);
-      const response = await res.json();
-
-      // Just take the top 4 without shuffling
-      const selectedData = response.slice(0, 4);
-      setLearnData(selectedData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const checkAnswer = () => {
     console.log("User's lines:", lines);
     console.log("Correct mapping:", imageToAudioMapping);
-    for (const [startBoxId, line] of Object.entries(lines)) {
-      const correctEndBoxId = imageToAudioMapping[startBoxId];
-      if (line.end !== correctEndBoxId) {
-        console.log(
-          `Mismatch: Expected ${startBoxId} to connect to ${correctEndBoxId} but found ${line.end}`
-        );
-        window.alert("Some answers are incorrect. Try again!");
-        return;
-      }
+
+    const output = selectedPairs.map((pair) => {
+      const question = questionsData.filter(
+        (q) => q.image._id === pair.imageId
+      );
+      return question[0].audio._id === pair.audioId ? question : null;
+    });
+
+    if (output.length !== 3) {
+      window.alert("Please match all the pairs. Try again!");
+    } else if (output.length === 3 && output.includes(null)) {
+      window.alert("Some answers are incorrect. Try again!");
+    } else {
+      window.alert("All answers are correct!");
     }
-    window.alert("All answers are correct!");
+
+    setTimeLeft(60);
+
+    // for (const [startBoxId, line] of Object.entries(lines)) {
+    //   const correctEndBoxId = imageToAudioMapping[startBoxId];
+    //   if (line.end !== correctEndBoxId) {
+    //     console.log(
+    //       `Mismatch: Expected ${startBoxId} to connect to ${correctEndBoxId} but found ${line.end}`
+    //     );
+    //     window.alert("Some answers are incorrect. Try again!");
+    //     return;
+    //   }
+    // }
   };
 
   return (
     <>
-      <button
+      {/* <button
         className="btn"
         style={{ width: 50 }}
         onClick={() => navigate("/user/kid/play/category")}
@@ -197,7 +215,7 @@ const MatchMasters = () => {
           className="bi bi-arrow-left-circle-fill"
           style={{ fontSize: "3rem" }}
         ></i>
-      </button>
+      </button> */}
       <div className="rectangle-container-mm">
         <canvas
           ref={canvasRef}
@@ -210,20 +228,19 @@ const MatchMasters = () => {
             zIndex: -1,
             width: "100%",
             height: "100%",
-          }}
-        ></canvas>
+          }}></canvas>
 
-        <div className="rectangle-mm">
+        <div className="rect-mm">
           {learnData.map((data, index) => (
             <button
-              key={index}
+              key={data.image._id}
               className="square-box-mm"
               box-id={`box${index + 1}`}
-              onMouseDown={(e) => handleStart(e, `box${index + 1}`)}
-            >
+              onMouseDown={(e) => handleStart(e, `box${index + 1}`)}>
               <img
                 width={100}
                 height={100}
+                imageid={data.image._id}
                 src={data.image.image}
                 alt="Image description"
               />
@@ -231,18 +248,20 @@ const MatchMasters = () => {
           ))}
         </div>
 
-        <div className="rectangle-mm">
+        <div className="rect-mm">
           {learnData.map((data, index) => (
             <button
-              key={index}
+              key={data.audio._id}
               className="square-box-mm"
               box-id={`box${index + learnData.length + 1}`}
               onMouseUp={(e) =>
                 handleEnd(e, `box${index + learnData.length + 1}`)
-              }
-            >
+              }>
               <audio controls>
-                <source src={data.audio.audio} />
+                <source
+                  audioid={data.audio._id}
+                  src={data.audio.audio}
+                />
               </audio>
             </button>
           ))}
@@ -262,8 +281,7 @@ const MatchMasters = () => {
           onClick={() => {
             checkAnswer();
             handleRefresh();
-          }}
-        >
+          }}>
           <img
             src="/assets/check.png"
             alt="Check Button"

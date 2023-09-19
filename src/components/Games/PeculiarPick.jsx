@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../../Styles/PeculiarPick.css";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header";
 
 const PeculiarPick = () => {
   const selectedCategory = useSelector((state) => state.category.category);
@@ -76,13 +77,20 @@ const PeculiarPick = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
+    if (randomNumber <= 0) {
+      window.alert("Beaker is full!"); // Optional alert message for the user.
+      return;
+    }
+
     const questionIndex = parseInt(e.dataTransfer.getData("questionIndex"), 10);
     const droppedImage = questions[questionIndex];
     setDroppedImages((prevImages) => [...prevImages, droppedImage]);
     setQuestions((prevQuestions) =>
       prevQuestions.filter((_, index) => index !== questionIndex)
     );
-    setRandomNumber((prevNumber) => prevNumber - 1);
+    if (randomNumber > 0) {
+      setRandomNumber((prevNumber) => prevNumber - 1);
+    }
   };
 
   const handleCheck = () => {
@@ -130,36 +138,15 @@ const PeculiarPick = () => {
   };
   return (
     <>
-      <button
-        className="btn"
-        style={{ width: 50 }}
-        onClick={() => navigate("/user/kid/play/category")}
-      >
-        <i
-          className="bi bi-arrow-left-circle-fill"
-          style={{ fontSize: "3rem" }}
-        ></i>
-      </button>
-      <div className="rectangle-container-pp">
-        <div className="rectangle-pp">
-          {questions.map((question, index) => (
-            <div
-              key={question.id}
-              className="square-box-pp"
-              draggable
-              onDragStart={(e) => handleDragStart(e, index)}
-            >
-              <img src={question.image} alt={question.name} />
-            </div>
-          ))}
-        </div>
-        <div
-          className="beaker-container-pp"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-        >
-          <div className="random-number-pp">{randomNumber}</div>
-        </div>
+      <div className="top-row-pp">
+        <button
+          className="btn"
+          style={{ width: 50 }}
+          onClick={() => navigate("/user/kid/play/category")}>
+          <i
+            className="bi bi-arrow-left-circle-fill"
+            style={{ fontSize: "3rem" }}></i>
+        </button>
         <div className="timer-content-pp">
           <img
             src="/assets/timer.png"
@@ -169,7 +156,39 @@ const PeculiarPick = () => {
           <p>Time left: {timeLeft} seconds</p>
         </div>
       </div>
-      <button className="check-button-pp" onClick={handleCheck}>
+      <div className="rectangle-container-pp">
+        <div className="rectangle-pp">
+          {questions.map((question, index) => (
+            <div
+              key={question.id}
+              className="square-box-pp"
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}>
+              <img
+                src={question.image}
+                alt={question.name}
+              />
+            </div>
+          ))}
+        </div>
+        <div
+          className="beaker-container-pp"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}>
+          <div className="random-number-pp">{randomNumber}</div>
+        </div>
+        {/* <div className="timer-content-pp">
+          <img
+            src="/assets/timer.png"
+            alt="Timer Icon"
+            className="sound-button-pp"
+          />
+          <p>Time left: {timeLeft} seconds</p>
+        </div> */}
+      </div>
+      <button
+        className="check-button-pp"
+        onClick={handleCheck}>
         <img
           src="/assets/check.png"
           alt="Check Button"
@@ -180,15 +199,21 @@ const PeculiarPick = () => {
         <div className="modal-content">
           {result === "correct" && (
             <>
-              <img src="/assets/correct.png" alt="Correct Answer" />
-              <p>Correct answer!</p>
+              <img
+                src="/assets/correct.png"
+                alt="Correct Answer"
+              />
+              {/* <p>Correct answer!</p> */}
               <button onClick={handleContinue}>Continue</button>
             </>
           )}
           {result === "wrong" && (
             <>
-              <img src="/assets/wrong.png" alt="Wrong Answer" />
-              <p>Wrong answer!</p>
+              <img
+                src="/assets/wrong.png"
+                alt="Wrong Answer"
+              />
+              {/* <p>Wrong answer!</p> */}
               <button onClick={handleContinue}>Continue</button>
             </>
           )}

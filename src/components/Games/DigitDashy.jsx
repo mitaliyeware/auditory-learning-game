@@ -10,7 +10,10 @@ const Modal = ({ show, message, imageSrc, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <img src={imageSrc} alt="Result" />
+        <img
+          src={imageSrc}
+          alt="Result"
+        />
         <p>{message}</p>
         <button onClick={onClose}>OK</button>
       </div>
@@ -104,19 +107,29 @@ const DigitDashy = () => {
 
   return (
     <>
-      <button
-        className="btn"
-        style={{ width: 50 }}
-        onClick={() => navigate("/user/kid/play/category")}
-      >
-        <i
-          className="bi bi-arrow-left-circle-fill"
-          style={{ fontSize: "3rem" }}
-        ></i>
-      </button>
+      <div className="top-row-pp">
+        <button
+          className="btn"
+          style={{ width: 50 }}
+          onClick={() => navigate("/user/kid/play/category")}>
+          <i
+            className="bi bi-arrow-left-circle-fill"
+            style={{ fontSize: "3rem" }}></i>
+        </button>
+        <div className="timer-content-pp">
+          <img
+            src="/assets/timer.png"
+            alt="Timer Icon"
+            className="sound-button-pp"
+          />
+          <p>Time left: {timeLeft} seconds</p>
+        </div>
+      </div>
       <div className="rectangles-container">
         {learnData.map((data, index) => (
-          <div key={data.id} className="rectangle-item">
+          <div
+            key={data.id}
+            className="rectangle-item">
             <input
               type="radio"
               name="box-selector"
@@ -149,15 +162,10 @@ const DigitDashy = () => {
         ))}
       </div>
       <audio ref={audioRef} />
-      <div className="timer-content-dd">
-        <img
-          src="/assets/timer.png"
-          alt="Timer Icon"
-          className="sound-button"
-        />
-        <p>Time left: {timeLeft} seconds</p>
-      </div>
-      <button className="check-button" onClick={handleCheckClick}>
+
+      <button
+        className="check-button"
+        onClick={handleCheckClick}>
         <img
           src="/assets/check.png"
           alt="Check Button"

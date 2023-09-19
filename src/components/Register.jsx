@@ -15,19 +15,25 @@ const userData = {
   rollNo: "",
   ageGroup: "",
   teacherId: "",
+  parentEmail: "",
 };
 
 const Register = () => {
+  const [selectedOption, setSelectedOption] = useState("");
+  const [user, setUser] = useState(userData);
+  const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
+  const dateInputRef = useRef(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const dateInputRef = useRef(null);
-  const [user, setUser] = useState(userData);
 
   useEffect(() => {
     dispatch(hideHomePage());
   }, []);
+
+  useEffect(() => {
+    showRegisterButton();
+  }, [user]);
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
@@ -40,6 +46,10 @@ const Register = () => {
   };
 
   const handleSubmit = async (event) => {
+    if (!userData.firstName) {
+      return;
+    }
+
     const myData = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -47,12 +57,10 @@ const Register = () => {
       password: user.password,
       contact: user.phone,
       birthDate: user.birthDate,
-      rollNo:
-        selectedOption === "kid" || selectedOption === "parent"
-          ? user.rollNo
-          : undefined,
+      rollNo: selectedOption === "kid" ? user.rollNo : undefined,
       ageGroup: selectedOption === "kid" ? user.ageGroup : undefined,
       teacherId: Number(user.teacherId),
+      parentEmail: selectedOption === "kid" ? user.parentEmail : undefined,
       userType: selectedOption,
     };
 
@@ -60,11 +68,7 @@ const Register = () => {
       const res = await fetch("http://localhost:3001/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "*",
-          // "Access-Control-Allow-Credentials": "true",
-          // "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          // "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
+          "Content-Type": "application/json", // "Access-Control-Allow-Origin": "*", // "Access-Control-Allow-Credentials": "true", // "Access-Control-Allow-Methods": "GET, POST, OPTIONS", // "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
         },
         body: JSON.stringify(myData),
       });
@@ -81,6 +85,35 @@ const Register = () => {
     }
   };
 
+  const showRegisterButton = () => {
+    if (
+      user &&
+      user.firstName &&
+      user.lastName &&
+      user.email &&
+      user.password
+    ) {
+      if (selectedOption === "kid") {
+        if (
+          user.rollNo &&
+          user.ageGroup &&
+          user.parentEmail &&
+          user.teacherId
+        ) {
+          setIsRegisterBtnDisabled(false);
+        }
+      } else if (selectedOption === "teacher") {
+        if (user.teacherId) {
+          setIsRegisterBtnDisabled(false);
+        }
+      } else {
+        setIsRegisterBtnDisabled(false);
+      }
+    } else {
+      setIsRegisterBtnDisabled(true);
+    }
+  };
+
   return (
     <div id="homeDiv">
       <div
@@ -88,7 +121,6 @@ const Register = () => {
         className="container shadow my-5">
         <div className="row justify-content-end">
           <h1 className="display-6 fw-bolder mb-5">Registration Form</h1>
-
           <div className="radioButtonDiv">
             <label>
               <input
@@ -133,9 +165,9 @@ const Register = () => {
                 />
                 <div id="submitButtonContainer">
                   <div className="col-md-6">
-                    <button
-                      //type="submit"
-                      className="btn btn-outline-light btn-primary w-50 pb-2 rounded-pill"
+                    <button //type="submit"
+                      disabled={isRegisterBtnDisabled}
+                      className="btn btn-primary w-50 pb-2 rounded-pill"
                       onClick={(e) => handleSubmit(e)}>
                       Register
                     </button>
@@ -151,7 +183,6 @@ const Register = () => {
                   </div>
                 </div>
               </div>
-              {/* </form> */}
             </div>
           )}
         </div>

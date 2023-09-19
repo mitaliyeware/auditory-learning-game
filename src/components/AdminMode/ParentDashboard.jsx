@@ -16,7 +16,7 @@ const ParentDashboard = () => {
   const getStudentData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3001/student?rollNo=${userDetails.rollNo}`,
+        `http://localhost:3001/student?parentEmail=${userDetails.email}`,
         {
           headers: {
             Accept: "application/json",
@@ -72,16 +72,14 @@ const ParentDashboard = () => {
       {deleteMessage && (
         <div
           className="alert alert-success alert-dismissible fade show"
-          role="alert"
-        >
+          role="alert">
           {deleteMessage}
           <button
             type="button"
             className="btn-close"
             data-bs-dismiss="alert"
             aria-label="Close"
-            onClick={closeDeleteMessage}
-          ></button>
+            onClick={closeDeleteMessage}></button>
         </div>
       )}
       <table className="table caption-top px-3 bg-white rounded mt-2">
@@ -108,14 +106,12 @@ const ParentDashboard = () => {
                 <td>
                   <button
                     className="btn btn-primary button-spacing"
-                    onClick={() => editStudentDetails(student)}
-                  >
+                    onClick={() => editStudentDetails(student)}>
                     Edit
                   </button>
                   <button
                     className="btn btn-danger"
-                    onClick={() => deleteProfile(student.email)}
-                  >
+                    onClick={() => deleteProfile(student.email)}>
                     Delete
                   </button>
                 </td>
@@ -123,7 +119,9 @@ const ParentDashboard = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="text-center">
+              <td
+                colSpan="6"
+                className="text-center">
                 No students found.
               </td>
             </tr>

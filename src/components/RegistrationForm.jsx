@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import "./../Styles/RegistrationForm.css";
 
 const RegistrationForm = ({
   user,
@@ -13,7 +14,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputFirstName"
-              className="inputFieldLabelExtended">
+              className="inputFieldLabelExtended control-label">
               First Name
             </label>
             <input
@@ -35,7 +36,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputLastName"
-              className="inputFieldLabelExtended">
+              className="inputFieldLabelExtended control-label">
               Last Name
             </label>
             <input
@@ -55,7 +56,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputEmail1"
-              className="inputFieldLabelExtended">
+              className="inputFieldLabelExtended control-label">
               Email address
             </label>
             <input
@@ -76,7 +77,7 @@ const RegistrationForm = ({
           <div className="mb-3">
             <label
               htmlFor="exampleInputPassword1"
-              className="inputFieldLabelExtended">
+              className="inputFieldLabelExtended control-label">
               Password
             </label>
             <input
@@ -139,7 +140,7 @@ const RegistrationForm = ({
               <div className="mb-3">
                 <label
                   htmlFor="exampleInputRollNo"
-                  className="inputFieldLabelExtended">
+                  className="inputFieldLabelExtended control-label">
                   Roll No
                 </label>
                 <input
@@ -159,7 +160,7 @@ const RegistrationForm = ({
             <div className="mb-3">
               <label
                 htmlFor="exampleInputAgeGroup"
-                className="inputFieldLabelExtended">
+                className="inputFieldLabelExtended control-label">
                 Age Group{" "}
               </label>
               <select
@@ -180,13 +181,12 @@ const RegistrationForm = ({
       </div>
 
       <div className="side-by-side">
-        {selectedOption !== "parent" &&
-        (selectedOption === "kid" || selectedOption === "teacher") ? (
+        {(selectedOption === "kid" || selectedOption === "teacher") && (
           <div className="col-md-6">
             <div className="mb-3">
               <label
                 htmlFor="exampleInputteacher"
-                className="inputFieldLabelExtended">
+                className="inputFieldLabelExtended control-label">
                 Teacher ID
               </label>
               <input
@@ -194,12 +194,33 @@ const RegistrationForm = ({
                 id="exampleInputteacher"
                 name="teacherId"
                 value={user.teacherId}
+                required
                 onChange={(e) => handleFieldChange(e)}
                 placeholder="Please Enter Teacher's ID Here"
               />
             </div>
           </div>
-        ) : null}
+        )}
+        {selectedOption === "kid" && (
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label
+                htmlFor="exampleInputParentEmail"
+                className="inputFieldLabelExtended control-label">
+                Parent's Email
+              </label>
+              <input
+                className="form-control"
+                id="exampleInputParentEmail"
+                name="parentEmail"
+                value={user.parentEmail}
+                required
+                onChange={(e) => handleFieldChange(e)}
+                placeholder="Please Enter Parent's Email Here"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

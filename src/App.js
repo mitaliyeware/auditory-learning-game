@@ -29,47 +29,93 @@ function App() {
 
   return (
     <div>
-            <Header />     {" "}
+      <Header />{" "}
       <Routes>
-               {" "}
+        {" "}
         {userType && (
           <Route
             path="/loginRedirect"
             element={<Navigate to={`/user/${userType}`} />}
           />
         )}
-                <Route exact path="/" Component={Home} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />       {" "}
-        <Route path="/user" element={<Body />}>
-                    <Route path="teacher" element={<TeacherDashboard />} />
-                    <Route path="parent" element={<ParentDashboard />} />
-                    <Route path="kid" element={<TaskSelect />} />
-                   {" "}
+        <Route
+          exact
+          path="/"
+          Component={Home}
+        />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+          path="/register"
+          element={<Register />}
+        />{" "}
+        <Route
+          path="/user"
+          element={<Body />}>
+          <Route
+            path="teacher"
+            element={<TeacherDashboard />}
+          />
+          <Route
+            path="parent"
+            element={<ParentDashboard />}
+          />
+          <Route
+            path="kid"
+            element={<TaskSelect />}
+          />{" "}
           <Route
             path={`kid/${selectedKidMode}/category`}
             element={<Category />}
           />
-                    <Route path="play" element={<PlayGame />} />
-                    <Route path="game" element={<GameSelect />} />
-                    <Route path="profile" element={<Profile />} />         {" "}
+          <Route
+            path="play"
+            element={<PlayGame />}
+          />
+          <Route
+            path="game"
+            element={<GameSelect />}
+          />
+          <Route
+            path="profile"
+            element={<Profile />}
+          />{" "}
           {/* <Route
             path="kid/game/category"
             element={<Category />}
           /> */}
-                    <Route path="upload" element={<UploadMedia />} />
-                    <Route path="learnobjects" element={<LearnObjects />} />
-                   {" "}
-          <Route path="game/matchmasters" element={<MatchMasters />} />
-                    <Route path="game/digitdashy" element={<DigitDashy />} />
-                   {" "}
-          <Route path="game/peculiarpick" element={<PeculiarPick />} />
-                    <Route path="game/targettuck" element={<TargetTuck />} />   
-             {" "}
+          <Route
+            path="upload"
+            element={<UploadMedia />}
+          />
+          <Route
+            path="learnobjects"
+            element={<LearnObjects />}
+          />{" "}
+          <Route
+            path="game/matchmasters"
+            element={<MatchMasters />}
+          />
+          <Route
+            path="game/digitdashy"
+            element={<DigitDashy />}
+          />{" "}
+          <Route
+            path="game/peculiarpick"
+            element={<PeculiarPick />}
+          />
+          <Route
+            path="game/targettuck"
+            element={<TargetTuck />}
+          />{" "}
         </Route>
-                <Route path="*" element={<NotFound />} />     {" "}
-      </Routes>
-         {" "}
+        <Route
+          path="*"
+          element={<NotFound />}
+        />{" "}
+      </Routes>{" "}
     </div>
   );
 }

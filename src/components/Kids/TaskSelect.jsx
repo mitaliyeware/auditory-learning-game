@@ -18,18 +18,20 @@ const TaskSelect = () => {
   return (
     <div className="page-container-ts">
       <div className="rectangle-container-ts">
-        <div className="clickable-box">
+        <div
+          className="clickable-box"
+          onClick={() => handleButtonClick("learn")}>
           <img
             src="/assets/learn.png"
             alt="Learn"
-            onClick={() => handleButtonClick("learn")}
           />
         </div>
-        <div className="clickable-box">
+        <div
+          className="clickable-box"
+          onClick={() => handleButtonClick("play")}>
           <img
             src="/assets/play.png"
             alt="Play"
-            onClick={() => handleButtonClick("play")}
           />
         </div>
       </div>

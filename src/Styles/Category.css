@@ -19,3 +19,11 @@
 .box-container-cc .box:hover img {
   transform: scale(1.1);
 } */
+
+.buttonBg {
+  background-color: #f7e2f1;
+}
+
+.box-container {
+  background-color: lightyellow;
+}

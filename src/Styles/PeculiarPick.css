@@ -107,22 +107,22 @@
   background-color: #ddd;
 }
 
-.timer-content-pp {
+/* .timer-content-pp {
   position: absolute;
   top: 0;
   right: 0;
   display: flex;
   align-items: center;
   gap: 5px; /* You can adjust this for spacing between icon and text */
-  background-color: rgba(
+/* background-color: rgba(
     255,
     255,
     255,
     0.8
   ); /* Optional, to give it some background for readability */
-  padding: 5px;
+/* padding: 5px;
   border-radius: 5px;
-}
+} */
 
 .modal {
   display: none;
@@ -151,4 +151,20 @@
 
 button {
   margin-top: 20px;
+}
+
+.top-row-pp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.timer-content-pp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 5px;
 }

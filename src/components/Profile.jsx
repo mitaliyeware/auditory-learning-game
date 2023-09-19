@@ -10,7 +10,7 @@ const initialUserData = {
   email: "",
   contact: "",
   birthDate: "",
-  rollNo: [],
+  rollNo: "",
   ageGroup: "",
   addressLine1: "",
   addressLine2: "",
@@ -154,43 +154,6 @@ const Profile = (props) => {
     return `${formattedDate}-${formattedMonth}-${year}`;
   };
 
-  const handleRollNoChange = (index) => (event) => {
-    const newRollNo = [...userData.rollNo];
-    newRollNo[index] = event.target.value;
-    setUserData((prevState) => ({ ...prevState, rollNo: newRollNo }));
-    setUpdatedFields((prevState) => ({
-      ...prevState,
-      rollNo: newRollNo,
-    }));
-  };
-
-  // Add a new roll number for parents
-  const addRollNumber = () => {
-    const updatedRollNos = [...userData.rollNo, ""];
-    setUserData((prevState) => ({
-      ...prevState,
-      rollNo: updatedRollNos,
-    }));
-    setUpdatedFields((prevState) => ({
-      ...prevState,
-      rollNo: updatedRollNos,
-    }));
-  };
-
-  // Delete a roll number for parents
-  const deleteRollNumber = (index) => {
-    const updatedRollNos = [...userData.rollNo];
-    updatedRollNos.splice(index, 1);
-    setUserData((prevState) => ({
-      ...prevState,
-      rollNo: updatedRollNos,
-    }));
-    setUpdatedFields((prevState) => ({
-      ...prevState,
-      rollNo: updatedRollNos,
-    }));
-  };
-
   const SuccessModal = () => {
     return (
       <div
@@ -198,12 +161,13 @@ const Profile = (props) => {
         id="successModal"
         tabIndex="-1"
         aria-labelledby="successModalLabel"
-        aria-hidden="true"
-      >
+        aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="successModalLabel">
+              <h5
+                className="modal-title"
+                id="successModalLabel">
                 Success!
               </h5>
               <button
@@ -211,8 +175,7 @@ const Profile = (props) => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                onClick={() => setShowSuccessModal(false)}
-              ></button>
+                onClick={() => setShowSuccessModal(false)}></button>
             </div>
             <div className="modal-body">{successMessage}</div>
             <div className="modal-footer">
@@ -220,8 +183,7 @@ const Profile = (props) => {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={() => setShowSuccessModal(false)}
-              >
+                onClick={() => setShowSuccessModal(false)}>
                 Close
               </button>
             </div>
@@ -319,81 +281,9 @@ const Profile = (props) => {
                 </label>
               )}
             </div>
-            {/* <div className="col-md-3">
-              {userData.userType === "parent" && (
-                <div>
-                  {userData.rollNo.map((roll, index) => (
-                    <div key={index}>
-                      <label className="form-label">
-                        Roll Number {index + 1}
-                      </label>
-                      <br />
-                      {editMode ? (
-                        <div className="d-flex">
-                          <input
-                            type="text"
-                            className="form-control"
-                            name={`rollNo[${index}]`}
-                            value={roll}
-                            onChange={handleRollNoChange(index)}
-                          />
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => deleteRollNumber(index)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      ) : (
-                        <label className="form-label">{roll}</label>
-                      )}
-                    </div>
-                  ))}
-                  {userData.userType === "parent" && editMode && (
-                    <button onClick={addRollNumber}>Add Roll Number</button>
-                  )}
-                </div>
-              )}
-              {userData.userType !== "parent" && (
-                <div>
-                  <label className="form-label">Roll Number</label>
-                  <br />
-                  {editMode ? (
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="rollNo[0]"
-                      value={userData.rollNo[0]}
-                      onChange={handleRollNoChange(0)}
-                    />
-                  ) : (
-                    <label className="form-label">{userData.rollNo[0]}</label>
-                  )}
-                </div>
-              )}
-            </div> */}
             {profileState && (
               <div className="col-md-3">
-                {userData.rollNo.map((roll, index) => (
-                  <div key={index}>
-                    <label className="form-label">
-                      Roll Number {index + 1}
-                    </label>
-                    <br />
-                    {editMode ? (
-                      <input
-                        type="text"
-                        className="form-control"
-                        name={`rollNo[${index}]`}
-                        value={roll}
-                        onChange={handleRollNoChange(index)}
-                      />
-                    ) : (
-                      <label className="form-label">{roll}</label>
-                    )}
-                  </div>
-                ))}
-                {/* <label className="form-label">Roll Number</label>
+                <label className="form-label">Roll Number</label>
                 <br />
                 {editMode ? (
                   <input
@@ -405,9 +295,10 @@ const Profile = (props) => {
                   />
                 ) : (
                   <label className="form-label">{userData.rollNo}</label>
-                )} */}
+                )}
               </div>
             )}
+
             {profileState && (
               <div className="col-md-3">
                 <label className="form-label">Age Group</label>
@@ -417,10 +308,11 @@ const Profile = (props) => {
                     className="form-control"
                     name="ageGroup"
                     value={userData.ageGroup}
-                    onChange={handleOptionChange}
-                  >
+                    onChange={handleOptionChange}>
                     {ageGroupList.map((age) => (
-                      <option key={age.value} value={age.value}>
+                      <option
+                        key={age.value}
+                        value={age.value}>
                         {age.name}
                       </option>
                     ))}
@@ -431,6 +323,23 @@ const Profile = (props) => {
                       (age) => age.value === userData.ageGroup && age.name
                     )}
                   </label>
+                )}
+              </div>
+            )}
+            {profileState && (
+              <div className="col-md-3">
+                <label className="form-label">Parent's Email</label>
+                <br />
+                {editMode ? (
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="parentEmail"
+                    value={userData.parentEmail}
+                    onChange={handleOptionChange}
+                  />
+                ) : (
+                  <label className="form-label">{userData.parentEmail}</label>
                 )}
               </div>
             )}
@@ -499,8 +408,7 @@ const Profile = (props) => {
           <button
             className="btn btn-primary"
             disabled={!editMode && !editPhoto && updatedFields.image}
-            onClick={() => setEditPhoto(!editPhoto)}
-          >
+            onClick={() => setEditPhoto(!editPhoto)}>
             Change Photo
           </button>
         </div>
@@ -592,11 +500,12 @@ const Profile = (props) => {
                   className="form-control"
                   name="country"
                   value={userData.country}
-                  onChange={handleOptionChange}
-                >
+                  onChange={handleOptionChange}>
                   <option value="Select country">Select Country</option>
                   {countryList.map((country) => (
-                    <option key={country.Iso2} value={country.Iso2}>
+                    <option
+                      key={country.Iso2}
+                      value={country.Iso2}>
                       {country.name}
                     </option>
                   ))}
@@ -620,15 +529,13 @@ const Profile = (props) => {
         <button
           type="button"
           className="btn btn-danger btn-lg"
-          onClick={deleteProfile}
-        >
+          onClick={deleteProfile}>
           Delete profile
         </button>
         <button
           type="button"
           className="btn btn-primary btn-lg"
-          onClick={updateProfile}
-        >
+          onClick={updateProfile}>
           {editMode ? "Update Profile" : "Edit profile"}
         </button>
         {showSuccessModal && <SuccessModal />}

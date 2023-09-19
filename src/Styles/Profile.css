@@ -1,0 +1,18 @@
+.personalDetailsLabel {
+  font-size: 17px;
+}
+
+.personalInfo {
+  font-size: 15px;
+}
+
+.my-4-box {
+  box-shadow: 1px 1px 4px rgb(145, 144, 144);
+  padding: 12px;
+  margin-left: 24px;
+  margin-right: 10px;
+}
+
+.my-6-box {
+  margin-top: 13px;
+}
