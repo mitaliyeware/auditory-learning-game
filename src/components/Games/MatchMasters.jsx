@@ -12,6 +12,8 @@ const MatchMasters = () => {
   const [selectedImageId, setSelectedImageId] = useState("");
   const [selectedPairs, setSelectedPairs] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [result, setResult] = useState(null);
   const selectedCategory = useSelector((state) => state.category.category);
   console.log("Selected Category:", selectedCategory);
   const navigate = useNavigate();
@@ -183,11 +185,16 @@ const MatchMasters = () => {
     });
 
     if (output.length !== 3) {
-      window.alert("Please match all the pairs. Try again!");
+      setResult("wrong");
+      setShowModal(true);
+      return;
     } else if (output.length === 3 && output.includes(null)) {
-      window.alert("Some answers are incorrect. Try again!");
+      setResult("wrong");
+      setShowModal(true);
+      return;
     } else {
-      window.alert("All answers are correct!");
+      setResult("correct");
+      setShowModal(true);
     }
 
     setTimeLeft(60);
@@ -204,6 +211,11 @@ const MatchMasters = () => {
     // }
   };
 
+  const handleContinue = () => {
+    setShowModal(false);
+    handleRefresh();
+  };
+
   return (
     <>
       {/* <button
@@ -216,6 +228,24 @@ const MatchMasters = () => {
           style={{ fontSize: "3rem" }}
         ></i>
       </button> */}
+      <div className="top-row-pp">
+        <button
+          className="btn"
+          style={{ width: 50 }}
+          onClick={() => navigate("/user/kid/play/category")}>
+          <i
+            className="bi bi-arrow-left-circle-fill"
+            style={{ fontSize: "3rem" }}></i>
+        </button>
+        <div className="timer-content-pp">
+          <img
+            src="/assets/timer.png"
+            alt="Timer Icon"
+            className="sound-button-pp"
+          />
+          <p>Time left: {timeLeft} seconds</p>
+        </div>
+      </div>
       <div className="rectangle-container-mm">
         <canvas
           ref={canvasRef}
@@ -266,28 +296,40 @@ const MatchMasters = () => {
             </button>
           ))}
         </div>
-
-        <div className="timer-content-mm">
-          <img
-            src="/assets/timer.png"
-            alt="Timer Icon"
-            className="sound-button-mm"
-          />
-          <p>Time left: {timeLeft} seconds</p>
-        </div>
       </div>
-      <div className="check-button-mm">
-        <button
-          onClick={() => {
-            checkAnswer();
-            handleRefresh();
-          }}>
-          <img
-            src="/assets/check.png"
-            alt="Check Button"
-            className="sound-button-mm"
-          />
-        </button>
+      <button
+        className="check-button-mm"
+        onClick={() => {
+          checkAnswer();
+          handleRefresh();
+        }}>
+        <img
+          src="/assets/check.png"
+          alt="Check Button"
+          className="sound-button-mm"
+        />
+      </button>
+      <div className={`modal ${showModal ? "active" : ""}`}>
+        <div className="modal-content">
+          {result === "correct" && (
+            <>
+              <img
+                src="/assets/correct.png"
+                alt="Correct Answer"
+              />
+              <button onClick={handleContinue}>Continue</button>
+            </>
+          )}
+          {result === "wrong" && (
+            <>
+              <img
+                src="/assets/wrong.png"
+                alt="Wrong Answer"
+              />
+              <button onClick={handleContinue}>Continue</button>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

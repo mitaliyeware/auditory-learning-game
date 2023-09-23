@@ -73,13 +73,13 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
-              <li className={`nav-item ${userDetails ? "invisible" : ""}`}>
+              {/* <li className={`nav-item ${userDetails ? "invisible" : ""}`}>
                 <NavLink
                   className="nav-link"
                   to="/About">
                   About
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
             {!userDetails && (
               <>

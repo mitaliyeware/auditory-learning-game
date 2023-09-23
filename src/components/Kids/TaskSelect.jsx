@@ -17,9 +17,9 @@ const TaskSelect = () => {
 
   return (
     <div className="page-container-ts">
-      <div className="rectangle-container-ts">
+      <div className="myRectangle rectangle-container-ts">
         <div
-          className="clickable-box"
+          className="card1 clickable-box"
           onClick={() => handleButtonClick("learn")}>
           <img
             src="/assets/learn.png"
@@ -27,7 +27,7 @@ const TaskSelect = () => {
           />
         </div>
         <div
-          className="clickable-box"
+          className="card2 clickable-box"
           onClick={() => handleButtonClick("play")}>
           <img
             src="/assets/play.png"

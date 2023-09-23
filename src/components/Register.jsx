@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import RegistrationForm from "./RegistrationForm";
 import { useDispatch } from "react-redux";
 import { hideHomePage } from "../utils/appSlice";
+import "../Styles/RegistrationForm.css";
 
 const userData = {
   firstName: "",
@@ -46,9 +47,9 @@ const Register = () => {
   };
 
   const handleSubmit = async (event) => {
-    if (!userData.firstName) {
-      return;
-    }
+    // if (!userData.firstName) {
+    //   return;
+    // }
 
     const myData = {
       firstName: user.firstName,
@@ -115,15 +116,18 @@ const Register = () => {
   };
 
   return (
-    <div id="homeDiv">
+    <div
+      id="homeDiv"
+      className="homeDiv">
       <div
         id="signUpMainDiv"
-        className="container shadow my-5">
+        className="registerContainer shadow my-5">
         <div className="row justify-content-end">
-          <h1 className="display-6 fw-bolder mb-5">Registration Form</h1>
+          <h1 className="display-6 fw-bolder mb-5">Register</h1>
           <div className="radioButtonDiv">
             <label>
               <input
+                className="radioInput"
                 type="radio"
                 name="userType"
                 value="kid"
@@ -134,6 +138,7 @@ const Register = () => {
             </label>
             <label>
               <input
+                className="radioInput"
                 type="radio"
                 name="userType"
                 value="teacher"
@@ -144,6 +149,7 @@ const Register = () => {
             </label>
             <label>
               <input
+                className="radioInput"
                 type="radio"
                 name="userType"
                 value="parent"
@@ -155,7 +161,7 @@ const Register = () => {
           </div>
           {/* <form id="signUpFormContainer" onSubmit={handleSubmit} method="POST"> */}
           {selectedOption && (
-            <div>
+            <div className="signUpForm">
               <div className="singUpFormSubDiv">
                 <RegistrationForm
                   user={user}
@@ -163,8 +169,10 @@ const Register = () => {
                   selectedOption={selectedOption}
                   handleFieldChange={handleFieldChange}
                 />
-                <div id="submitButtonContainer">
-                  <div className="col-md-6">
+                <div
+                  id="submitButtonContainer"
+                  className="submitButtonContainer">
+                  <div className="submitButton col-md-6">
                     <button //type="submit"
                       disabled={isRegisterBtnDisabled}
                       className="btn btn-primary w-50 pb-2 rounded-pill"
@@ -172,14 +180,14 @@ const Register = () => {
                       Register
                     </button>
                   </div>
-                  <div className="col-md-6 d-flex align-items-center">
-                    <p className="lead text-center ms-auto">Existing User?</p>
-                    <NavLink
+                  <div className="existingUserLabel col-md-6 d-flex align-items-center">
+                    <p className="">Existing User?</p>
+                    {/* <NavLink
                       to="/login"
                       className="btn btn-outline-light rounded-pill pb-2 w-50 ms-auto px-4 ">
                       <i className="fa fa-sign-in me-2"></i>
                       Login
-                    </NavLink>
+                    </NavLink> */}
                   </div>
                 </div>
               </div>

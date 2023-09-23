@@ -19,6 +19,7 @@ const initialUserData = {
   state: "",
   country: "",
   image: "",
+  parentEmail: "",
   userType: "",
 };
 
@@ -154,6 +155,16 @@ const Profile = (props) => {
     return `${formattedDate}-${formattedMonth}-${year}`;
   };
 
+  // const handleRollNoChange = (index) => (event) => {
+  //   const newRollNo = [...userData.rollNo];
+  //   newRollNo[index] = event.target.value;
+  //   setUserData((prevState) => ({ ...prevState, rollNo: newRollNo }));
+  //   setUpdatedFields((prevState) => ({
+  //     ...prevState,
+  //     rollNo: newRollNo,
+  //   }));
+  // };
+
   const SuccessModal = () => {
     return (
       <div
@@ -195,117 +206,177 @@ const Profile = (props) => {
 
   return (
     <div className="row mb-5 gx-5">
-      <div className="my-6">
+      <div className="my-6-box my-6">
         <h1>Profile Page</h1>
       </div>
-      <details className="my-4">
+      <details className="my-4-box my-4">
         <summary>Personal Details</summary>
         <div className="container">
           <div class="row justify-content-start">
             <div className="col-md-3 mb-4">
-              <label className="form-label">First Name</label>
+              <label className="personalDetailsLabel">First Name</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="firstName"
                   value={userData.firstName}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.firstName}</label>
+                <label className="personalDetailsLabel">
+                  {userData.firstName}
+                </label>
               )}
             </div>
             <div className="col-md-3">
-              <label className="form-label">Last Name</label>
+              <label className="personalDetailsLabel">Last Name</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="lastName"
                   value={userData.lastName}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.lastName}</label>
+                <label className="personalDetailsLabel">
+                  {userData.lastName}
+                </label>
               )}
             </div>
             <div className="col-md-3">
-              <label className="form-label">Email ID</label>
+              <label className="personalDetailsLabel">Email ID</label>
               <br />
               {editMode ? (
                 <input
                   type="email"
-                  className="form-control"
+                  className="personalInfo"
                   name="email"
                   readOnly
                   value={userData.email}
                   // onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.email}</label>
+                <label className="personalDetailsLabel">{userData.email}</label>
               )}
             </div>
             <div className="col-md-3">
-              <label className="form-label">Phone Number</label>
+              <label className="personalDetailsLabel">Phone Number</label>
               <br />
               {editMode ? (
                 <input
                   type="tel"
-                  className="form-control"
+                  className="personalInfo"
                   name="contact"
                   value={userData.contact}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.contact}</label>
+                <label className="personalDetailsLabel">
+                  {userData.contact}
+                </label>
               )}
             </div>
             <div className="col-md-3">
-              <label className="form-label">Birth Date</label>
+              <label className="personalDetailsLabel">Birth Date</label>
               <br />
               {editMode ? (
                 <input
                   type="date"
-                  className="form-control datepicker"
+                  className="personalInfo datepicker"
                   name="birthDate"
                   value={formatDateOfBirth(userData?.birthDate)}
                   // value={userDetails.birthDate}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">
+                <label className="personalDetailsLabel">
                   {formatDateOfBirth(userData.birthDate)}
                 </label>
               )}
             </div>
+            {/* <div className="col-md-3">
+              {userData.userType === "parent" && (
+                <div>
+                  {userData.rollNo.map((roll, index) => (
+                    <div key={index}>
+                      <label className="personalDetailsLabel">
+                        Roll Number {index + 1}
+                      </label>
+                      <br />
+                      {editMode ? (
+                        <div className="d-flex">
+                          <input
+                            type="text"
+                            className="personalInfo"
+                            name={`rollNo[${index}]`}
+                            value={roll}
+                            onChange={handleRollNoChange(index)}
+                          />
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => deleteRollNumber(index)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="personalDetailsLabel">{roll}</label>
+                      )}
+                    </div>
+                  ))}
+                  {userData.userType === "parent" && editMode && (
+                    <button onClick={addRollNumber}>Add Roll Number</button>
+                  )}
+                </div>
+              )}
+              {userData.userType !== "parent" && (
+                <div>
+                  <label className="personalDetailsLabel">Roll Number</label>
+                  <br />
+                  {editMode ? (
+                    <input
+                      type="text"
+                      className="personalInfo"
+                      name="rollNo[0]"
+                      value={userData.rollNo[0]}
+                      onChange={handleRollNoChange(0)}
+                    />
+                  ) : (
+                    <label className="personalDetailsLabel">{userData.rollNo[0]}</label>
+                  )}
+                </div>
+              )}
+            </div> */}
             {profileState && (
               <div className="col-md-3">
-                <label className="form-label">Roll Number</label>
+                <label className="personalDetailsLabel">Roll Number</label>
                 <br />
                 {editMode ? (
                   <input
                     type="text"
-                    className="form-control"
+                    className="personalInfo"
                     name="rollNo"
                     value={userData.rollNo}
                     onChange={handleOptionChange}
                   />
                 ) : (
-                  <label className="form-label">{userData.rollNo}</label>
+                  <label className="personalDetailsLabel">
+                    {userData.rollNo}
+                  </label>
                 )}
               </div>
             )}
-
             {profileState && (
               <div className="col-md-3">
-                <label className="form-label">Age Group</label>
+                <label className="personalDetailsLabel">Age Group</label>
                 <br />
                 {editMode ? (
                   <select
-                    className="form-control"
+                    className="personalInfo"
                     name="ageGroup"
                     value={userData.ageGroup}
                     onChange={handleOptionChange}>
@@ -318,7 +389,7 @@ const Profile = (props) => {
                     ))}
                   </select>
                 ) : (
-                  <label className="form-label">
+                  <label className="personalDetailsLabel">
                     {ageGroupList.map(
                       (age) => age.value === userData.ageGroup && age.name
                     )}
@@ -328,25 +399,27 @@ const Profile = (props) => {
             )}
             {profileState && (
               <div className="col-md-3">
-                <label className="form-label">Parent's Email</label>
+                <label className="personalDetailsLabel">Parent's Email</label>
                 <br />
                 {editMode ? (
                   <input
                     type="text"
-                    className="form-control"
+                    className="personalInfo"
                     name="parentEmail"
                     value={userData.parentEmail}
                     onChange={handleOptionChange}
                   />
                 ) : (
-                  <label className="form-label">{userData.parentEmail}</label>
+                  <label className="personalDetailsLabel">
+                    {userData.parentEmail}
+                  </label>
                 )}
               </div>
             )}
           </div>
         </div>
       </details>
-      <details className="my-4">
+      <details className="my-4-box my-4">
         <summary className="mb-2">Profile Photo</summary>
         {/* <div class="square position-relative display-2 mb-3">
           <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
@@ -382,7 +455,7 @@ const Profile = (props) => {
               </button>
               <input
                 type="file"
-                className="form-control-file position-absolute"
+                className="personalInfo-file position-absolute"
                 style={{
                   top: 0,
                   left: 0,
@@ -413,91 +486,97 @@ const Profile = (props) => {
           </button>
         </div>
       </details>
-      <details className="my-4">
+      <details className="my-4-box my-4">
         <summary>Address</summary>
         <div className="container">
           <div class="row justify-content-start">
             <div className="col-md-4">
-              <label className="form-label">Address Line 1</label>
+              <label className="personalDetailsLabel">Address Line 1</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control mb-4"
+                  className="personalInfo mb-4"
                   name="addressLine1"
                   value={userData.addressLine1}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.addressLine1}</label>
+                <label className="personalDetailsLabel">
+                  {userData.addressLine1}
+                </label>
               )}
             </div>
             <div className="col-md-4">
-              <label className="form-label">Address Line 2</label>
+              <label className="personalDetailsLabel">Address Line 2</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="addressLine2"
                   value={userData.addressLine2}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.addressLine2}</label>
+                <label className="personalDetailsLabel">
+                  {userData.addressLine2}
+                </label>
               )}
             </div>
             <div className="col-md-4">
-              <label className="form-label">ZIP Code</label>
+              <label className="personalDetailsLabel">ZIP Code</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="zipCode"
                   value={userData.zipCode}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.zipCode}</label>
+                <label className="personalDetailsLabel">
+                  {userData.zipCode}
+                </label>
               )}
             </div>
             <div className="col-md-4">
-              <label className="form-label">City</label>
+              <label className="personalDetailsLabel">City</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="city"
                   value={userData.city}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.city}</label>
+                <label className="personalDetailsLabel">{userData.city}</label>
               )}
             </div>
             <div className="col-md-4">
-              <label className="form-label">state</label>
+              <label className="personalDetailsLabel">state</label>
               <br />
               {editMode ? (
                 <input
                   type="text"
-                  className="form-control"
+                  className="personalInfo"
                   name="state"
                   value={userData.state}
                   onChange={handleOptionChange}
                 />
               ) : (
-                <label className="form-label">{userData.state}</label>
+                <label className="personalDetailsLabel">{userData.state}</label>
               )}
             </div>
             <div className="col-md-4">
-              <label className="form-label">Country</label>
+              <label className="personalDetailsLabel">Country</label>
               <br />
               {editMode ? (
                 <select
-                  className="form-control"
+                  className="personalInfo"
                   name="country"
                   value={userData.country}
                   onChange={handleOptionChange}>
@@ -513,7 +592,7 @@ const Profile = (props) => {
                   {/* onChange={handleOptionChange} */}
                 </select>
               ) : (
-                <label className="form-label">
+                <label className="personalDetailsLabel">
                   {countryList.map(
                     (country) =>
                       country.Iso2 === userData.country && country.name

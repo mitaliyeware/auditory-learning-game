@@ -2,3 +2,65 @@
   content: "*";
   color: red;
 }
+
+.inputLabelRegister {
+  font-size: 15px;
+}
+
+.inputFieldsRegister {
+  width: 94%;
+}
+
+.registerContainer {
+  background-color: white;
+  padding: 20px;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px rgb(145, 144, 144);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeDiv {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: rgb(103, 108, 114);
+  /* background: linear-gradient(
+    90deg,
+    rgb(0, 101, 219) 30%,
+    rgba(0, 212, 255, 1) 100%
+  ); */
+  background-image: url("../../public/assets/back.png");
+  background-repeat: no-repeat;
+}
+
+.signUpForm {
+  width: 90%;
+  margin-top: 60px;
+}
+
+.radioInput {
+  margin-right: 6px;
+}
+
+.submitButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+}
+
+.existingUserLabel {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}

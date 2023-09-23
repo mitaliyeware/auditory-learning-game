@@ -6,6 +6,7 @@ import UploadMedia from "../UploadMedia";
 import GameSelect from "../GameSelect";
 import StudentPerformance from "../StudentPerformance";
 import TaskSelect from "../Kids/TaskSelect";
+import "../../Styles/UserPanel.css";
 
 const UserPanel = ({ userDetails }) => {
   const [currentView, setCurrentView] = useState("dashboard");
@@ -26,7 +27,7 @@ const UserPanel = ({ userDetails }) => {
               </div>
             ) : null}
             {userDetails?.userType === "teacher" ? (
-              <div className="col-10">
+              <div className="teacherDashboardTable col-10">
                 {/* <Routes>
                   <Route exact path="/dashboard" Component={TeacherDashboard} />
                 </Routes> */}

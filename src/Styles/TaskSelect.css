@@ -14,7 +14,8 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: var(--white); /* Default background color */
+  background-color: aquamarine;
+  /* background-color: var(--pink); */
   border-radius: 2rem;
   box-shadow: var(--box-shadow);
   outline: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -38,4 +39,16 @@
 .rectangle-container-ts .clickable-box img {
   max-width: 50%;
   max-height: 50%;
+}
+
+.myRectangle {
+  margin-top: 7%;
+}
+
+.card1 {
+  background-color: lightyellow !important;
+}
+
+.card2 {
+  background-color: #ffe0ff !important;
 }
